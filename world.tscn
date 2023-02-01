@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://x220mqj0ihhs"]
+[gd_scene load_steps=3 format=3 uid="uid://x220mqj0ihhs"]
+
+[ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="1_gk6xr"]
+[ext_resource type="Script" path="res://player.gd" id="1_u1hny"]
 
 [node name="World" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_u1hny")
+
+[node name="Pivot" type="Node2D" parent="Player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Pivot"]
+texture = ExtResource("1_gk6xr")
+hframes = 14
+vframes = 14
+frame = 28
