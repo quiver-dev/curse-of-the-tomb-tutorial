@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7bn3cuvxygir"]
+[gd_scene load_steps=13 format=3 uid="uid://c7bn3cuvxygir"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_1ngdk"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="2_m1aku"]
+[ext_resource type="PackedScene" uid="uid://b5yi7rm5nuk3e" path="res://utilities/extended_audio_stream_player.tscn" id="3_77ir5"]
+[ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_2wcly"]
+[ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="6_brc8q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgd0n"]
 radius = 80.0
@@ -72,6 +75,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [70, 71, 72, 73, 74, 75, 76, 77, 78]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Jump")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_80hco"]
 resource_name = "run"
@@ -89,6 +106,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Footstep")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25, 0.599323),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}, {
+"args": [],
+"method": &"play_at_random_pitch"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j72vw"]
@@ -120,3 +154,14 @@ shape = SubResource("CapsuleShape2D_wgd0n")
 libraries = {
 "": SubResource("AnimationLibrary_j72vw")
 }
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Footstep" parent="Sounds" instance=ExtResource("3_77ir5")]
+stream = ExtResource("4_2wcly")
+volume_db = -8.0
+pitch_scale = 2.0
+
+[node name="Jump" parent="Sounds" instance=ExtResource("3_77ir5")]
+stream = ExtResource("6_brc8q")
+volume_db = -4.0
