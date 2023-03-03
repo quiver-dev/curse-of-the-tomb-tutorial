@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7bn3cuvxygir"]
+[gd_scene load_steps=14 format=3 uid="uid://c7bn3cuvxygir"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_1ngdk"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="2_m1aku"]
-[ext_resource type="PackedScene" uid="uid://b5yi7rm5nuk3e" path="res://utilities/extended_audio_stream_player.tscn" id="3_77ir5"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="3_77ir5"]
 [ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_2wcly"]
 [ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="6_brc8q"]
+[ext_resource type="Script" path="res://utilities/state_machine.gd" id="6_fldet"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgd0n"]
 radius = 80.0
@@ -165,3 +166,14 @@ pitch_scale = 2.0
 [node name="Jump" parent="Sounds" instance=ExtResource("3_77ir5")]
 stream = ExtResource("6_brc8q")
 volume_db = -4.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_fldet")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Run" type="Node" parent="StateMachine"]
+
+[node name="Jump" type="Node" parent="StateMachine"]
+
+[node name="Fall" type="Node" parent="StateMachine"]

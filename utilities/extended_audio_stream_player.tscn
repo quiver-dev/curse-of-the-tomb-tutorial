@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5yi7rm5nuk3e"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://utilities/ExtendedAudioStreamPlayer.gd" id="1_gleam"]
+[ext_resource type="Script" path="res://utilities/extended_audio_stream_player.gd" id="1_gleam"]
 
 [node name="ExtendedAudioStreamPlayer" type="AudioStreamPlayer"]
 script = ExtResource("1_gleam")
