@@ -1,11 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7bn3cuvxygir"]
+[gd_scene load_steps=18 format=3 uid="uid://c2gmra0xgmisf"]
 
-[ext_resource type="Script" path="res://entities/player.gd" id="1_1ngdk"]
-[ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="2_m1aku"]
-[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="3_77ir5"]
-[ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_2wcly"]
-[ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="6_brc8q"]
-[ext_resource type="Script" path="res://utilities/state_machine.gd" id="6_fldet"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
+[ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="2_2f3f1"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="3_8shcl"]
+[ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_xchk1"]
+[ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="5_os3fr"]
+[ext_resource type="Script" path="res://utilities/state_machine.gd" id="6_xfatq"]
+[ext_resource type="Script" path="res://entities/player/player_idle.gd" id="7_uvk36"]
+[ext_resource type="Script" path="res://entities/player/player_run.gd" id="8_bbl8y"]
+[ext_resource type="Script" path="res://entities/player/player_jump.gd" id="9_f3pc0"]
+[ext_resource type="Script" path="res://entities/player/player_fall.gd" id="10_5td2u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgd0n"]
 radius = 80.0
@@ -137,12 +141,12 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("1_1ngdk")
+script = ExtResource("1_nqmvq")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("2_m1aku")
+texture = ExtResource("2_2f3f1")
 hframes = 14
 vframes = 14
 frame = 30
@@ -158,22 +162,26 @@ libraries = {
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="Footstep" parent="Sounds" instance=ExtResource("3_77ir5")]
-stream = ExtResource("4_2wcly")
+[node name="Footstep" parent="Sounds" instance=ExtResource("3_8shcl")]
+stream = ExtResource("4_xchk1")
 volume_db = -8.0
 pitch_scale = 2.0
 
-[node name="Jump" parent="Sounds" instance=ExtResource("3_77ir5")]
-stream = ExtResource("6_brc8q")
+[node name="Jump" parent="Sounds" instance=ExtResource("3_8shcl")]
+stream = ExtResource("5_os3fr")
 volume_db = -4.0
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("6_fldet")
+script = ExtResource("6_xfatq")
 
 [node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_uvk36")
 
 [node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("8_bbl8y")
 
 [node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("9_f3pc0")
 
 [node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("10_5td2u")
