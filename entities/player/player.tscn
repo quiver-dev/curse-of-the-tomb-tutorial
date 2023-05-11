@@ -142,6 +142,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_nqmvq")
+max_health = 3
 
 [node name="Pivot" type="Node2D" parent="."]
 

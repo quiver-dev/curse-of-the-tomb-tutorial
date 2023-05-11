@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 
 
 enum States { IDLE, RUN, JUMP, FALL }
@@ -20,6 +20,7 @@ var input_buffer_remaining: float = 0.0
 
 
 func _ready() -> void:
+	super._ready()
 	state_machine.add_state(States.IDLE, $StateMachine/Idle)
 	state_machine.add_state(States.RUN, $StateMachine/Run)
 	state_machine.add_state(States.JUMP, $StateMachine/Jump)
@@ -62,6 +63,9 @@ func is_falling() -> bool:
 	return velocity.y > 250.0
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		input_buffer_remaining = jump_input_buffer
+
+	if event.is_action_pressed("attack"):
+		take_damage(1)
