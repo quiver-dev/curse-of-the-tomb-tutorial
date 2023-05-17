@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c2gmra0xgmisf"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
-[ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/player_spritesheet.png" id="2_2f3f1"]
+[ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/theguardian_spritesheet.png" id="2_2f3f1"]
 [ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="3_8shcl"]
 [ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_xchk1"]
 [ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="5_os3fr"]
