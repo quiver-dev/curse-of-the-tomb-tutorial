@@ -16,6 +16,9 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
+	if host.attack():
+		return host.States.ATTACK
+
 	if host.is_falling():
 		return host.States.FALL
 

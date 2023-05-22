@@ -1,19 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://c2gmra0xgmisf"]
+[gd_scene load_steps=22 format=3 uid="uid://c2gmra0xgmisf"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/theguardian_spritesheet.png" id="2_2f3f1"]
 [ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="3_8shcl"]
 [ext_resource type="AudioStream" uid="uid://ckybuap8bdhga" path="res://assets/sounds/footstep_1.wav" id="4_xchk1"]
 [ext_resource type="AudioStream" uid="uid://conmjehd63bp5" path="res://assets/sounds/jump.wav" id="5_os3fr"]
+[ext_resource type="AudioStream" uid="uid://cm20tfygn8p35" path="res://assets/sounds/attack.wav" id="6_k06sq"]
 [ext_resource type="Script" path="res://utilities/state_machine.gd" id="6_xfatq"]
 [ext_resource type="Script" path="res://entities/player/player_idle.gd" id="7_uvk36"]
 [ext_resource type="Script" path="res://entities/player/player_run.gd" id="8_bbl8y"]
 [ext_resource type="Script" path="res://entities/player/player_jump.gd" id="9_f3pc0"]
 [ext_resource type="Script" path="res://entities/player/player_fall.gd" id="10_5td2u"]
+[ext_resource type="Script" path="res://entities/player/player_attack.gd" id="12_g1kmt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgd0n"]
 radius = 80.0
 height = 360.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3wj7"]
+size = Vector2(150, 300)
 
 [sub_resource type="Animation" id="Animation_kqutv"]
 length = 0.001
@@ -28,6 +33,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [30]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_8f43p"]
@@ -130,9 +147,53 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_wc4ej"]
+resource_name = "attack"
+length = 0.16
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [112, 118]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j72vw"]
 _data = {
 "RESET": SubResource("Animation_kqutv"),
+"attack": SubResource("Animation_wc4ej"),
 "fall": SubResource("Animation_8f43p"),
 "idle": SubResource("Animation_c7cuu"),
 "jump": SubResource("Animation_oahqb"),
@@ -156,6 +217,16 @@ frame = 30
 position = Vector2(2.08165e-12, 40)
 shape = SubResource("CapsuleShape2D_wgd0n")
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(197, 68)
+shape = SubResource("RectangleShape2D_j3wj7")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_j72vw")
@@ -172,6 +243,10 @@ pitch_scale = 2.0
 stream = ExtResource("5_os3fr")
 volume_db = -4.0
 
+[node name="Attack" parent="Sounds" instance=ExtResource("3_8shcl")]
+stream = ExtResource("6_k06sq")
+volume_db = -8.0
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("6_xfatq")
 
@@ -186,3 +261,6 @@ script = ExtResource("9_f3pc0")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("10_5td2u")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("12_g1kmt")

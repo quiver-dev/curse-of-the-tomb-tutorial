@@ -2,7 +2,7 @@ extends State
 
 
 func _enter(previous_state, host):
-	host.animation_player.play("fall")
+	host.animation_player.play("attack")
 
 
 func _exit(new_state, host):
@@ -14,10 +14,7 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
-	if host.attack():
-		return host.States.ATTACK
-
-	if host.is_on_floor():
+	if host.attack_time_remaining <= 0.0:
 		return host.States.IDLE
 
 	return null
