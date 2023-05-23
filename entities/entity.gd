@@ -27,4 +27,4 @@ func take_damage(damage: int):
 
 
 func die():
-	pass
+	is_dead = true
