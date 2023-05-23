@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvgkd5k4g87tx"]
+[gd_scene load_steps=11 format=3 uid="uid://dvgkd5k4g87tx"]
 
 [ext_resource type="Script" path="res://entities/scorpion/scorpion.gd" id="1_c2q6j"]
 [ext_resource type="Texture2D" uid="uid://mhl1sve62ogo" path="res://assets/sprites/scorpion_spritesheet.png" id="2_ammxi"]
+[ext_resource type="PackedScene" uid="uid://btk5ekt1aaicl" path="res://entities/hurtbox.tscn" id="3_16eti"]
 [ext_resource type="Script" path="res://utilities/state_machine.gd" id="3_kg705"]
 [ext_resource type="Script" path="res://entities/scorpion/scorpion_patrol.gd" id="4_fb552"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr3gm"]
+size = Vector2(205, 95)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ykq5p"]
 radius = 80.0
@@ -70,6 +74,14 @@ target_position = Vector2(2.08165e-12, 80)
 position = Vector2(-150, 140)
 scale = Vector2(3, 3)
 target_position = Vector2(2.08165e-12, 40)
+
+[node name="Hurtbox" parent="Pivot" instance=ExtResource("3_16eti")]
+collision_mask = 2
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hurtbox"]
+position = Vector2(-18, 123)
+shape = SubResource("RectangleShape2D_lr3gm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 110)
