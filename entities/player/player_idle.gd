@@ -25,6 +25,9 @@ func _get_next_state(host):
 	if host.jump():
 		return host.States.JUMP
 
+	if host.knockback():
+		return host.States.KNOCKBACK
+
 	if not is_zero_approx(host.velocity.x):
 		return host.States.RUN
 

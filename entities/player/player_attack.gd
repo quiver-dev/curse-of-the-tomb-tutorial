@@ -17,4 +17,7 @@ func _get_next_state(host):
 	if host.attack_time_remaining <= 0.0:
 		return host.States.IDLE
 
+	if host.knockback():
+		return host.States.KNOCKBACK
+
 	return null
