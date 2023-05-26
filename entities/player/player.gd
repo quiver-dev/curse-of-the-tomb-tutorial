@@ -33,6 +33,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if direction > 0:

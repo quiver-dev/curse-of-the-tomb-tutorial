@@ -193,6 +193,7 @@ _data = {
 collision_layer = 2
 script = ExtResource("1_nqmvq")
 max_health = 3
+invulnerability_time = 1.0
 
 [node name="Pivot" type="Node2D" parent="."]
 

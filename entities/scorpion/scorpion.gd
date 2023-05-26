@@ -23,6 +23,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	super(delta)
 	if wall_check.is_colliding() or not ground_check.is_colliding():
 		direction *= -1
 
