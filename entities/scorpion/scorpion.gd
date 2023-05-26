@@ -20,6 +20,7 @@ func _ready() -> void:
 	state_machine.add_state(States.PATROL, $StateMachine/Patrol)
 	state_machine.add_state(States.DIE, $StateMachine/Die)
 	state_machine.initialize(self, States.PATROL)
+	on_damage_taken.connect(_on_damage_taken)
 
 
 func _physics_process(delta: float) -> void:
@@ -37,6 +38,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func take_damage(damage: int):
+func _on_damage_taken(attacker: Node2D):
 	$Hit.play_at_random_pitch()
-	super(damage)

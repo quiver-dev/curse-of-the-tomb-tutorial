@@ -6,4 +6,4 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Entity:
-		body.take_damage(damage)
+		body.take_damage(damage, get_owner())
