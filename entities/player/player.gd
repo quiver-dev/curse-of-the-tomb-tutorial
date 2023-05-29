@@ -3,15 +3,17 @@ extends Entity
 
 enum States { IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK }
 
-@export var speed: float = 1000.0
+@export var speed: float = 1500.0
+@export var acceleration := 150.0
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var jump_velocity: float = -1500
+@export var jump_velocity: float = -2500
+@export var jump_deceleration := 200.0
 @export var knockback_velocity := Vector2(1500, -1500)
 
 @export var knockback_time := 0.2
 var knockback_time_remaining := 0.0
 
-@export var jump_hang_time: float = 0.15
+@export var jump_hang_time: float = 0.2
 var hang_time_remaining: float = 0.0
 
 @export var jump_input_buffer: float = 0.15
@@ -23,6 +25,7 @@ var attack_time_remaining: float = 0.0
 var input_disabled := false
 var did_get_hit := false
 var hit_direction := 1
+var jumps_remaining := 1
 
 @onready var pivot = $Pivot
 @onready var animation_player = $AnimationPlayer
@@ -46,22 +49,23 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 	if not input_disabled:
-		var direction = Input.get_axis("move_left", "move_right")
+		var direction = get_movement_direction()
 
 		if direction > 0:
 			pivot.scale.x = 1
 		elif direction < 0:
 			pivot.scale.x = -1
 
-		velocity.x = direction * speed
+		velocity.x = move_toward(velocity.x, direction * speed, acceleration)
 
 	if not is_on_floor():
 		if hang_time_remaining > 0:
-			velocity.y = jump_velocity
 			hang_time_remaining -= delta
 		else:
 			# This is our fall state
 			velocity.y += gravity
+	elif not [States.JUMP, States.FALL].has(state_machine.current_state):
+		jumps_remaining = 1
 
 	if input_buffer_remaining > 0.0:
 		input_buffer_remaining -= delta
@@ -76,9 +80,10 @@ func _physics_process(delta: float) -> void:
 
 
 func jump() -> bool:
-	if input_buffer_remaining > 0.0 and is_on_floor():
+	if input_buffer_remaining > 0.0 and jumps_remaining > 0:
 		velocity.y = jump_velocity
 		hang_time_remaining = jump_hang_time
+		jumps_remaining -= 1
 		return true
 	return false
 
@@ -99,6 +104,10 @@ func knockback() -> bool:
 		knockback_time_remaining = knockback_time
 		return true
 	return false
+
+
+func get_movement_direction() -> float:
+	return Input.get_axis("move_left", "move_right")
 
 
 func _on_damage_taken(attacker: Node2D):

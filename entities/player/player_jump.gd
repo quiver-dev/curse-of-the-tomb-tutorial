@@ -10,7 +10,8 @@ func _exit(new_state, host):
 
 
 func _execute(delta, host):
-	pass
+	if not Input.is_action_pressed("jump"):
+		host.velocity.y += host.jump_deceleration
 
 
 func _get_next_state(host):
