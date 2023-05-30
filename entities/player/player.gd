@@ -1,4 +1,5 @@
 extends Entity
+class_name Player
 
 
 enum States { IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK }
@@ -43,6 +44,9 @@ func _ready() -> void:
 	state_machine.add_state(States.KNOCKBACK, $StateMachine/Knockback)
 	state_machine.initialize(self, States.IDLE)
 	on_damage_taken.connect(_on_damage_taken)
+
+	if has_node("Camera2D"):
+		$Camera2D.player = self
 
 
 func _physics_process(delta: float) -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=7 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="1_3c1pe"]
 [ext_resource type="PackedScene" uid="uid://c2gmra0xgmisf" path="res://entities/player/player.tscn" id="2_gm3i3"]
+[ext_resource type="Script" path="res://utilities/camera_controller.gd" id="3_dp7ee"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="3_yktfh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0r0kc"]
@@ -138,6 +139,8 @@ layer_0/tile_data = PackedInt32Array(131072, 131072, 1, 131073, 131072, 1, 19660
 [node name="Player" parent="." instance=ExtResource("2_gm3i3")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.75, 0.75)
+script = ExtResource("3_dp7ee")
 
 [node name="Scorpion" parent="." instance=ExtResource("3_yktfh")]
 position = Vector2(710, 158)
