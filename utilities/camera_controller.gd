@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var direction := 0.0
-	if player != null:
+	if player != null and not player.input_disabled:
 		direction = player.get_movement_direction()
 
 	var look_ahead_offset = Vector2(direction * look_ahead_distance, 0)

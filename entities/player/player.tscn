@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c2gmra0xgmisf"]
+[gd_scene load_steps=28 format=3 uid="uid://c2gmra0xgmisf"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/theguardian_spritesheet.png" id="2_2f3f1"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://entities/player/player_run.gd" id="8_bbl8y"]
 [ext_resource type="Script" path="res://entities/player/player_jump.gd" id="9_f3pc0"]
 [ext_resource type="Script" path="res://entities/player/player_fall.gd" id="10_5td2u"]
+[ext_resource type="Script" path="res://entities/player/player_spawn.gd" id="10_n4520"]
 [ext_resource type="Script" path="res://entities/player/player_attack.gd" id="12_g1kmt"]
 [ext_resource type="Script" path="res://entities/player/player_knockback.gd" id="14_8um55"]
 
@@ -212,6 +213,22 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_rtr0c"]
+resource_name = "spawn"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 22]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j72vw"]
 _data = {
 "RESET": SubResource("Animation_kqutv"),
@@ -220,7 +237,8 @@ _data = {
 "idle": SubResource("Animation_c7cuu"),
 "jump": SubResource("Animation_oahqb"),
 "knockback": SubResource("Animation_ntvl5"),
-"run": SubResource("Animation_80hco")
+"run": SubResource("Animation_80hco"),
+"spawn": SubResource("Animation_rtr0c")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -273,6 +291,9 @@ volume_db = -8.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("6_xfatq")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("10_n4520")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("7_uvk36")
