@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvtfdx3g0761x"]
+[gd_scene load_steps=3 format=3 uid="uid://dvtfdx3g0761x"]
 
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_3dd4b"]
 [ext_resource type="PackedScene" uid="uid://gxfl1xfhu4x5" path="res://ui/heart_sprite.tscn" id="1_7lgq8"]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_3dd4b")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -23,6 +25,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="HeartArea" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HeartSprite" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
@@ -35,9 +38,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="HeartSprite4" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
-layout_mode = 2
-
-[node name="HeartSprite5" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
 layout_mode = 2
 
 [node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
