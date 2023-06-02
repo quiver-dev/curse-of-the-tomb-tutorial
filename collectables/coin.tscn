@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgrvxmx8fk1qe"]
+
+[ext_resource type="PackedScene" uid="uid://cdbbw4p1b5kjj" path="res://collectables/collectable.tscn" id="1_6edgw"]
+[ext_resource type="Texture2D" uid="uid://owanmjmcukqe" path="res://assets/sprites/gem_sprites.png" id="2_vudbf"]
+[ext_resource type="AudioStream" uid="uid://dx8ferlhdvtqo" path="res://assets/sounds/gem.wav" id="3_8iww0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4uvs"]
+size = Vector2(50, 80)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihmb2"]
+radius = 300.0
+
+[sub_resource type="Animation" id="Animation_0suse"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ms1uo"]
+_data = {
+"idle": SubResource("Animation_0suse")
+}
+
+[node name="Coin" instance=ExtResource("1_6edgw")]
+action = 1
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_c4uvs")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_vudbf")
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="CollisionShape2D" parent="AttractionZone" index="0"]
+shape = SubResource("CircleShape2D_ihmb2")
+
+[node name="Collect" parent="." index="3"]
+stream = ExtResource("3_8iww0")
+volume_db = -8.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_ms1uo")
+}

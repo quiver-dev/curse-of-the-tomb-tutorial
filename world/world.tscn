@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=11 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://utilities/camera_controller.gd" id="4_ry57f"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="5_u2nau"]
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
+[ext_resource type="PackedScene" uid="uid://cgrvxmx8fk1qe" path="res://collectables/coin.tscn" id="7_2b1fo"]
 [ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="7_6r0xk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0r0kc"]
@@ -153,10 +154,36 @@ position = Vector2(710, 158)
 [node name="Scorpion2" parent="." instance=ExtResource("5_u2nau")]
 position = Vector2(1748, -95)
 
-[node name="HUD" parent="." instance=ExtResource("6_scts8")]
+[node name="CollectableManager" type="Node" parent="."]
 
-[node name="Heart" parent="." instance=ExtResource("7_6r0xk")]
+[node name="Heart" parent="CollectableManager" instance=ExtResource("7_6r0xk")]
 position = Vector2(969, 150)
 
-[node name="Heart2" parent="." instance=ExtResource("7_6r0xk")]
+[node name="Heart2" parent="CollectableManager" instance=ExtResource("7_6r0xk")]
 position = Vector2(2217, -323)
+
+[node name="Coin" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(-639, -85)
+
+[node name="Coin2" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(-381, 158)
+
+[node name="Coin3" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(-170, 158)
+
+[node name="Coin4" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(23, 158)
+
+[node name="Coin5" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(194, 158)
+
+[node name="Coin6" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(1504, -101)
+
+[node name="Coin7" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(1689, -101)
+
+[node name="Coin8" parent="CollectableManager" instance=ExtResource("7_2b1fo")]
+position = Vector2(1897, -101)
+
+[node name="HUD" parent="." instance=ExtResource("6_scts8")]

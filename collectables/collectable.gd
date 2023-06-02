@@ -1,9 +1,9 @@
 extends Area2D
 
 
-enum Action { GIVE_HEALTH }
+enum Action { GIVE_HEALTH, GIVE_COIN }
 
-@export var attraction_speed := 150.0
+@export var attraction_speed := 50.0
 @export var action: Action = Action.GIVE_HEALTH
 @export var action_amount: int = 1
 
@@ -27,6 +27,8 @@ func collect():
 	match action:
 		Action.GIVE_HEALTH:
 			player.restore_health(action_amount)
+		Action.GIVE_COIN:
+			GameManager.coins += action_amount
 
 
 func _on_attraction_zone_body_entered(body: Node2D) -> void:
@@ -40,5 +42,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_destroy_timer_timeout() -> void:
-	print("collectable destroyed!")
 	queue_free()
