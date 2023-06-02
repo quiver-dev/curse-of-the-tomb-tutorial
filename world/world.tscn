@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=10 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://utilities/camera_controller.gd" id="4_ry57f"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="5_u2nau"]
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
+[ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="7_6r0xk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0r0kc"]
 texture = ExtResource("2_mywcq")
@@ -153,3 +154,9 @@ position = Vector2(710, 158)
 position = Vector2(1748, -95)
 
 [node name="HUD" parent="." instance=ExtResource("6_scts8")]
+
+[node name="Heart" parent="." instance=ExtResource("7_6r0xk")]
+position = Vector2(969, 150)
+
+[node name="Heart2" parent="." instance=ExtResource("7_6r0xk")]
+position = Vector2(2217, -323)

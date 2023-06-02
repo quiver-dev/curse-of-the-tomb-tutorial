@@ -42,6 +42,13 @@ func take_damage(damage: int, attacker: Node2D):
 		die()
 
 
+func restore_health(health: int):
+	var previous_health = current_health
+	current_health = clampi(current_health + health, current_health, max_health)
+	if current_health != previous_health:
+		on_health_changed.emit(current_health)
+
+
 func play_damage_tween() -> Tween:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 0, 0), 0.2)
