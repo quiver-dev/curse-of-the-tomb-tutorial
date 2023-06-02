@@ -53,6 +53,7 @@ stream = ExtResource("3_8iww0")
 volume_db = -8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_ms1uo")
 }
