@@ -43,3 +43,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_destroy_timer_timeout() -> void:
 	queue_free()
+
+
+func _on_collect_timer_timeout() -> void:
+	$CollisionShape2D.disabled = false
+	$AttractionZone/CollisionShape2D.disabled = false

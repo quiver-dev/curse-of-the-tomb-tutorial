@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=12 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
 [ext_resource type="PackedScene" uid="uid://c2gmra0xgmisf" path="res://entities/player/player.tscn" id="3_o8bw8"]
 [ext_resource type="Script" path="res://utilities/camera_controller.gd" id="4_ry57f"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="5_u2nau"]
+[ext_resource type="Script" path="res://collectables/collectable_manager.gd" id="6_7oqul"]
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
 [ext_resource type="PackedScene" uid="uid://cgrvxmx8fk1qe" path="res://collectables/coin.tscn" id="7_2b1fo"]
 [ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="7_6r0xk"]
@@ -148,13 +149,20 @@ position = Vector2(-1936, -394)
 zoom = Vector2(0.75, 0.75)
 script = ExtResource("4_ry57f")
 
-[node name="Scorpion" parent="." instance=ExtResource("5_u2nau")]
-position = Vector2(710, 158)
+[node name="Enemies" type="Node" parent="."]
 
-[node name="Scorpion2" parent="." instance=ExtResource("5_u2nau")]
+[node name="Scorpion" parent="Enemies" instance=ExtResource("5_u2nau")]
+position = Vector2(710, 158)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
+[node name="Scorpion2" parent="Enemies" instance=ExtResource("5_u2nau")]
 position = Vector2(1748, -95)
+rotation = -3.14159
+scale = Vector2(1, -1)
 
 [node name="CollectableManager" type="Node" parent="."]
+script = ExtResource("6_7oqul")
 
 [node name="Heart" parent="CollectableManager" instance=ExtResource("7_6r0xk")]
 position = Vector2(969, 150)
