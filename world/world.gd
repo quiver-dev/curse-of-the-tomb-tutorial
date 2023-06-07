@@ -8,6 +8,7 @@ func _ready() -> void:
 	player.current_health = GameManager.health
 
 	player.on_health_changed.connect(handle_player_health_changed)
+	player.respawn_needed.connect(GameManager.handle_player_respawn_needed)
 
 	$HUD.initialize(player)
 	$CollectableManager.initialize($Enemies.get_children())

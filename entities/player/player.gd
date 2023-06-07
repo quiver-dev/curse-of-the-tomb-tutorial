@@ -2,7 +2,9 @@ extends Entity
 class_name Player
 
 
-enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK }
+signal respawn_needed
+
+enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK, DIE }
 
 @export var speed: float = 1500.0
 @export var acceleration := 150.0
@@ -43,6 +45,7 @@ func _ready() -> void:
 	state_machine.add_state(States.FALL, $StateMachine/Fall)
 	state_machine.add_state(States.ATTACK, $StateMachine/Attack)
 	state_machine.add_state(States.KNOCKBACK, $StateMachine/Knockback)
+	state_machine.add_state(States.DIE, $StateMachine/Die)
 	state_machine.initialize(self, States.SPAWN)
 	on_damage_taken.connect(_on_damage_taken)
 
@@ -109,6 +112,10 @@ func knockback() -> bool:
 		knockback_time_remaining = knockback_time
 		return true
 	return false
+
+
+func respawn():
+	respawn_needed.emit()
 
 
 func get_movement_direction() -> float:

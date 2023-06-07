@@ -19,6 +19,9 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
+	if host.is_dead:
+		return host.States.DIE
+
 	if spawn_time_remaining <= 0.0:
 		return host.States.IDLE
 
