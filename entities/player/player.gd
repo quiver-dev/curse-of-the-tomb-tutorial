@@ -12,6 +12,7 @@ enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK, DIE }
 @export var jump_velocity: float = -2500
 @export var jump_deceleration := 200.0
 @export var knockback_velocity := Vector2(1500, -1500)
+@export var max_fall_time := 3.0
 
 @export var knockback_time := 0.2
 var knockback_time_remaining := 0.0

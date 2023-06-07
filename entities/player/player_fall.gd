@@ -1,8 +1,12 @@
 extends State
 
 
+var current_fall_time := 0.0
+
+
 func _enter(previous_state, host):
 	host.animation_player.play("fall")
+	current_fall_time = 0
 
 
 func _exit(new_state, host):
@@ -10,7 +14,10 @@ func _exit(new_state, host):
 
 
 func _execute(delta, host):
-	pass
+	current_fall_time += delta
+	print(current_fall_time)
+	if current_fall_time > host.max_fall_time:
+		host.respawn()
 
 
 func _get_next_state(host):
