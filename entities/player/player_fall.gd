@@ -15,7 +15,6 @@ func _exit(new_state, host):
 
 func _execute(delta, host):
 	current_fall_time += delta
-	print(current_fall_time)
 	if current_fall_time > host.max_fall_time:
 		host.respawn()
 
