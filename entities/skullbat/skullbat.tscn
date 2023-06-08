@@ -1,9 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cm3druo1qq5j5"]
+[gd_scene load_steps=17 format=3 uid="uid://cm3druo1qq5j5"]
 
 [ext_resource type="PackedScene" uid="uid://cvx863djastva" path="res://entities/enemy.tscn" id="1_vbtdg"]
 [ext_resource type="Texture2D" uid="uid://c4om4xs8wikoe" path="res://assets/sprites/skullbat_spritesheet.png" id="2_f3bml"]
 [ext_resource type="Script" path="res://entities/skullbat/skullbat.gd" id="2_rivt5"]
 [ext_resource type="AudioStream" uid="uid://cwx0dt8sp4hd1" path="res://assets/sounds/hit.wav" id="3_o0klu"]
+[ext_resource type="Script" path="res://entities/skullbat/skullbat_idle.gd" id="5_npbcp"]
+[ext_resource type="Script" path="res://entities/skullbat/skullbat_fall.gd" id="6_1qwip"]
+[ext_resource type="Script" path="res://entities/skullbat/skullbat_fly.gd" id="7_sc0m3"]
+[ext_resource type="Script" path="res://entities/skullbat/skullbat_die.gd" id="8_rg2bf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aps38"]
 size = Vector2(260, 180)
@@ -167,7 +171,10 @@ _data = {
 }
 
 [node name="Skullbat" instance=ExtResource("1_vbtdg")]
+collision_mask = 0
 script = ExtResource("2_rivt5")
+fly_speed = 500.0
+fall_speed = 800.0
 
 [node name="Sprite2D" parent="Pivot" index="0"]
 texture = ExtResource("2_f3bml")
@@ -177,13 +184,35 @@ vframes = 4
 [node name="CollisionShape2D" parent="Pivot/Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_aps38")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="DetectionZone" type="Area2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionZone" index="0"]
+polygon = PackedVector2Array(2.08165e-12, -100, 1000, 800, -1000, 800)
+
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("RectangleShape2D_4rdl2")
 
-[node name="Hit" parent="." index="2"]
+[node name="Hit" parent="." index="3"]
 stream = ExtResource("3_o0klu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("5_npbcp")
+
+[node name="Fall" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("6_1qwip")
+
+[node name="Fly" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("7_sc0m3")
+
+[node name="Die" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("8_rg2bf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_p4cg3")
 }
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]

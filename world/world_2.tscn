@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://chuufec3e7ekj"]
+[gd_scene load_steps=7 format=3 uid="uid://chuufec3e7ekj"]
 
 [ext_resource type="PackedScene" uid="uid://bdmy1xj54k4jr" path="res://world/world.tscn" id="1_x71lp"]
 [ext_resource type="PackedScene" uid="uid://d1dnnur6ia6jb" path="res://world/portal.tscn" id="2_wfobk"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="3_pr6e6"]
+[ext_resource type="PackedScene" uid="uid://cm3druo1qq5j5" path="res://entities/skullbat/skullbat.tscn" id="4_6p5ym"]
 [ext_resource type="PackedScene" uid="uid://cgrvxmx8fk1qe" path="res://collectables/coin.tscn" id="4_q5s1x"]
 [ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="5_2gvg5"]
 
@@ -41,6 +42,9 @@ position = Vector2(15877.1, 159.274)
 
 [node name="Scorpion7" parent="Enemies" index="6" instance=ExtResource("3_pr6e6")]
 position = Vector2(12236.2, -357.669)
+
+[node name="Skullbat" parent="Enemies" index="7" instance=ExtResource("4_6p5ym")]
+position = Vector2(4157.35, -220.662)
 
 [node name="Coin" parent="CollectableManager" index="0" instance=ExtResource("4_q5s1x")]
 position = Vector2(905.349, 212.366)
