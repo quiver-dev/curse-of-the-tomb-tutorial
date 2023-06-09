@@ -1,0 +1,228 @@
+[gd_scene load_steps=16 format=3 uid="uid://dy6pixc0y8iw0"]
+
+[ext_resource type="PackedScene" uid="uid://cvx863djastva" path="res://entities/enemy.tscn" id="1_u0avx"]
+[ext_resource type="Texture2D" uid="uid://cqnmaxrxfr2ox" path="res://assets/sprites/archaeologist_spritesheet.png" id="2_gyv0c"]
+[ext_resource type="Script" path="res://entities/archaeologist/archaeologist.gd" id="2_td628"]
+[ext_resource type="AudioStream" uid="uid://cwx0dt8sp4hd1" path="res://assets/sounds/hit.wav" id="3_4untg"]
+[ext_resource type="Script" path="res://entities/archaeologist/archaeologist_idle.gd" id="4_y8w0f"]
+[ext_resource type="Script" path="res://entities/archaeologist/archaeologist_attack.gd" id="5_5f7c5"]
+[ext_resource type="Script" path="res://entities/archaeologist/archaeologist_die.gd" id="6_m080f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_glyix"]
+radius = 80.0
+height = 360.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_crmmg"]
+radius = 100.0
+height = 360.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgjnt"]
+size = Vector2(2000, 360)
+
+[sub_resource type="Animation" id="Animation_6ujuc"]
+resource_name = "idle"
+length = 0.55
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+
+[sub_resource type="Animation" id="Animation_4rsul"]
+resource_name = "attack"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [26, 49]
+}
+
+[sub_resource type="Animation" id="Animation_70h2b"]
+resource_name = "die"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [65, 76]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Hurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_obihd"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rq7va"]
+_data = {
+"RESET": SubResource("Animation_obihd"),
+"attack": SubResource("Animation_4rsul"),
+"die": SubResource("Animation_70h2b"),
+"idle": SubResource("Animation_6ujuc")
+}
+
+[node name="Archaeologist" instance=ExtResource("1_u0avx")]
+scale = Vector2(-1, 1)
+script = ExtResource("2_td628")
+
+[node name="Sprite2D" parent="Pivot" index="0"]
+texture = ExtResource("2_gyv0c")
+hframes = 13
+vframes = 6
+
+[node name="CollisionShape2D" parent="Pivot/Hurtbox" index="0"]
+position = Vector2(20, 25)
+shape = SubResource("CapsuleShape2D_glyix")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(20, 25)
+shape = SubResource("CapsuleShape2D_crmmg")
+
+[node name="DetectionZone" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" index="0"]
+position = Vector2(5, 27.5)
+shape = SubResource("RectangleShape2D_bgjnt")
+debug_color = Color(0.701961, 0.254902, 0.270588, 0.419608)
+
+[node name="Hit" parent="." index="3"]
+stream = ExtResource("3_4untg")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_y8w0f")
+
+[node name="Attack" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_5f7c5")
+
+[node name="Die" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("6_m080f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_rq7va")
+}
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

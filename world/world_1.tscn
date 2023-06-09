@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://mriifi5sktd0"]
+[gd_scene load_steps=9 format=3 uid="uid://mriifi5sktd0"]
 
 [ext_resource type="PackedScene" uid="uid://bdmy1xj54k4jr" path="res://world/world.tscn" id="1_nec7n"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="2_ygx56"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="4_1a6ce"]
 [ext_resource type="PackedScene" uid="uid://d1dnnur6ia6jb" path="res://world/portal.tscn" id="5_eqvvy"]
 [ext_resource type="PackedScene" uid="uid://cm3druo1qq5j5" path="res://entities/skullbat/skullbat.tscn" id="5_pwi3s"]
+[ext_resource type="PackedScene" uid="uid://dy6pixc0y8iw0" path="res://entities/archaeologist/archaeologist.tscn" id="6_uhro1"]
 
 [node name="World 1" instance=ExtResource("1_nec7n")]
 
@@ -38,6 +39,9 @@ position = Vector2(8385.58, 1185.41)
 
 [node name="Skullbat" parent="Enemies" index="4" instance=ExtResource("5_pwi3s")]
 position = Vector2(7597.27, 297.501)
+
+[node name="Archaeologist" parent="Enemies" index="5" instance=ExtResource("6_uhro1")]
+position = Vector2(5173.33, 1393.66)
 
 [node name="Coin" parent="CollectableManager" index="0" instance=ExtResource("3_038yr")]
 position = Vector2(1223.34, 1190.15)
