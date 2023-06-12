@@ -11,7 +11,10 @@ func _ready() -> void:
 	player.respawn_needed.connect(GameManager.handle_player_respawn_needed)
 
 	$HUD.initialize(player)
-	$CollectableManager.initialize($Enemies.get_children())
+
+	var enemies = $Enemies.get_children()
+	$CollectableManager.initialize(enemies)
+	$ProjectileManager.initialize(enemies)
 
 
 func handle_player_health_changed(new_health: int):

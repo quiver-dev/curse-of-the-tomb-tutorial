@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=12 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
 [ext_resource type="PackedScene" uid="uid://c2gmra0xgmisf" path="res://entities/player/player.tscn" id="3_o8bw8"]
 [ext_resource type="Script" path="res://utilities/camera_controller.gd" id="4_ry57f"]
 [ext_resource type="Script" path="res://collectables/collectable_manager.gd" id="6_7oqul"]
+[ext_resource type="Script" path="res://world/projectile_manager.gd" id="6_rpaap"]
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
 [ext_resource type="PackedScene" uid="uid://j23swdys4xvy" path="res://world/parallax_background.tscn" id="10_hfspt"]
 [ext_resource type="PackedScene" uid="uid://sh8yqcirmu6y" path="res://world/sand_layer.tscn" id="11_t5uq6"]
@@ -1180,6 +1181,9 @@ script = ExtResource("4_ry57f")
 
 [node name="CollectableManager" type="Node" parent="."]
 script = ExtResource("6_7oqul")
+
+[node name="ProjectileManager" type="Node" parent="."]
+script = ExtResource("6_rpaap")
 
 [node name="HUD" parent="." instance=ExtResource("6_scts8")]
 

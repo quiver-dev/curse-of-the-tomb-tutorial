@@ -1,6 +1,8 @@
 extends Entity
 
 
+signal torch_thrown(location, direction)
+
 enum States { IDLE, ATTACK, DIE }
 
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -11,6 +13,7 @@ var player: Player
 @onready var pivot = $Pivot
 @onready var animation_player = $AnimationPlayer
 @onready var state_machine = $StateMachine
+@onready var throw_position = $Pivot/ThrowPosition
 
 
 func _ready() -> void:
@@ -37,6 +40,10 @@ func _physics_process(delta: float) -> void:
 	velocity.x = 0
 	velocity.y += gravity
 	move_and_slide()
+
+
+func throw_torch():
+	torch_thrown.emit(throw_position.global_position, direction)
 
 
 func _on_damage_taken(attacker: Node2D):
