@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://mriifi5sktd0"]
+[gd_scene load_steps=12 format=3 uid="uid://mriifi5sktd0"]
 
 [ext_resource type="PackedScene" uid="uid://bdmy1xj54k4jr" path="res://world/world.tscn" id="1_nec7n"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="2_ygx56"]
 [ext_resource type="PackedScene" uid="uid://cgrvxmx8fk1qe" path="res://collectables/coin.tscn" id="3_038yr"]
 [ext_resource type="PackedScene" uid="uid://chuufec3e7ekj" path="res://world/world_2.tscn" id="3_ors4g"]
 [ext_resource type="PackedScene" uid="uid://c3jp18xm2pdp7" path="res://collectables/heart.tscn" id="4_1a6ce"]
+[ext_resource type="PackedScene" uid="uid://ciu2v63f5lifm" path="res://breakable/pot.tscn" id="4_bo5lw"]
 [ext_resource type="PackedScene" uid="uid://d1dnnur6ia6jb" path="res://world/portal.tscn" id="5_eqvvy"]
 [ext_resource type="PackedScene" uid="uid://cm3druo1qq5j5" path="res://entities/skullbat/skullbat.tscn" id="5_pwi3s"]
+[ext_resource type="PackedScene" uid="uid://smln4gqapmjv" path="res://breakable/wall_torch.tscn" id="5_varr4"]
 [ext_resource type="PackedScene" uid="uid://dy6pixc0y8iw0" path="res://entities/archaeologist/archaeologist.tscn" id="6_uhro1"]
 [ext_resource type="PackedScene" uid="uid://ned827cp7ode" path="res://entities/henchman/henchman.tscn" id="7_5k1iy"]
 
@@ -25,6 +27,33 @@ next_level = ExtResource("3_ors4g")
 
 [node name="Player" parent="." index="2"]
 position = Vector2(-97.2036, 1145.11)
+
+[node name="Pot" parent="Breakables" index="0" instance=ExtResource("4_bo5lw")]
+position = Vector2(2587.52, 1543.46)
+
+[node name="Pot2" parent="Breakables" index="1" instance=ExtResource("4_bo5lw")]
+position = Vector2(2781.73, 1544.92)
+
+[node name="Pot3" parent="Breakables" index="2" instance=ExtResource("4_bo5lw")]
+position = Vector2(2990.54, 1540.54)
+
+[node name="Pot4" parent="Breakables" index="3" instance=ExtResource("4_bo5lw")]
+position = Vector2(4322.27, 1799)
+
+[node name="Pot5" parent="Breakables" index="4" instance=ExtResource("4_bo5lw")]
+position = Vector2(4498.96, 1799)
+
+[node name="WallTorch" parent="Breakables" index="5" instance=ExtResource("5_varr4")]
+position = Vector2(8676.75, 1181.92)
+
+[node name="WallTorch2" parent="Breakables" index="6" instance=ExtResource("5_varr4")]
+position = Vector2(7954.31, 926.328)
+
+[node name="WallTorch3" parent="Breakables" index="7" instance=ExtResource("5_varr4")]
+position = Vector2(7302.77, 924.85)
+
+[node name="WallTorch4" parent="Breakables" index="8" instance=ExtResource("5_varr4")]
+position = Vector2(6926.04, 642.668)
 
 [node name="Scorpion" parent="Enemies" index="0" instance=ExtResource("2_ygx56")]
 position = Vector2(3914.22, 1685.65)

@@ -6,7 +6,7 @@ signal on_damage_taken(attacker: Node2D)
 signal on_health_changed(new_health: int)
 signal on_death(entity)
 
-
+@export var should_play_damage_tween := true
 @export var max_health := 1
 var current_health := 1
 
@@ -51,6 +51,9 @@ func restore_health(health: int):
 
 
 func play_damage_tween() -> Tween:
+	if not should_play_damage_tween:
+		return null
+
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 0, 0), 0.2)
 	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
@@ -58,6 +61,9 @@ func play_damage_tween() -> Tween:
 
 
 func play_invulnerability_tween() -> Tween:
+	if not should_play_damage_tween:
+		return null
+
 	var tween = play_damage_tween()
 	for i in range(4):
 		tween.tween_property(self, "modulate:a", 0.2, 0.1)

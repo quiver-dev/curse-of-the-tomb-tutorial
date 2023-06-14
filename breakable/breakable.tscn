@@ -4,9 +4,11 @@
 [ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="1_tvvd8"]
 
 [node name="Breakable" type="CharacterBody2D"]
+z_index = -1
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_442i8")
+should_play_damage_tween = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

@@ -19,7 +19,7 @@ layer_4/tile_data = PackedInt32Array(65560, 720896, 9, 28, 786432, 9, 29, 851968
 [node name="Portal" parent="." index="1" instance=ExtResource("2_wfobk")]
 position = Vector2(17804.6, -843.875)
 
-[node name="Player" parent="." index="2"]
+[node name="Player" parent="." index="3"]
 position = Vector2(111.151, 125.045)
 
 [node name="Scorpion" parent="Enemies" index="0" instance=ExtResource("3_pr6e6")]
