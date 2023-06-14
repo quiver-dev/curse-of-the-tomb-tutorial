@@ -13,7 +13,8 @@ func _ready() -> void:
 	$HUD.initialize(player)
 
 	var enemies = $Enemies.get_children()
-	$CollectableManager.initialize(enemies)
+	var breakables = $Breakables.get_children()
+	$CollectableManager.initialize(enemies, breakables)
 	$ProjectileManager.initialize(enemies)
 
 

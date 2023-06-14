@@ -5,9 +5,13 @@ var heart = preload("res://collectables/heart.tscn")
 var coin = preload("res://collectables/coin.tscn")
 
 
-func initialize(enemies: Array[Node]):
+func initialize(enemies: Array[Node], breakables: Array[Node]):
 	for enemy in enemies:
 		enemy.on_death.connect(handle_enemy_death)
+
+	for breakable in breakables:
+		if breakable.should_drop_collectable:
+			breakable.on_death.connect(handle_breakable_death)
 
 
 func spawn_collectable(location: Vector2):
@@ -28,3 +32,7 @@ func spawn_collectable(location: Vector2):
 
 func handle_enemy_death(enemy: Entity):
 	spawn_collectable(enemy.global_position)
+
+
+func handle_breakable_death(breakable: Entity):
+	spawn_collectable(breakable.global_position)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://denq8sud1kav"]
+
+[ext_resource type="Script" path="res://breakable/breakable.gd" id="1_442i8"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="1_tvvd8"]
+
+[node name="Breakable" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_442i8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Hit" parent="." instance=ExtResource("1_tvvd8")]
+volume_db = -8.0

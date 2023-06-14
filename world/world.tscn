@@ -1177,6 +1177,8 @@ layer_4/tile_data = PackedInt32Array()
 zoom = Vector2(0.75, 0.75)
 script = ExtResource("4_ry57f")
 
+[node name="Breakables" type="Node" parent="."]
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="CollectableManager" type="Node" parent="."]
