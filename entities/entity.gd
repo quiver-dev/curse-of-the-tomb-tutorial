@@ -50,6 +50,12 @@ func restore_health(health: int):
 		on_health_changed.emit(current_health)
 
 
+func change_max_health(new_max_health: int):
+	max_health = new_max_health
+	current_health = max_health
+	on_health_changed.emit(current_health)
+
+
 func play_damage_tween() -> Tween:
 	if not should_play_damage_tween:
 		return null

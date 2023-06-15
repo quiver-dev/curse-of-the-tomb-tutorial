@@ -18,13 +18,24 @@ func _ready() -> void:
 	if texture != null:
 		$Sprite2D.texture = texture
 
+	if GameManager.has_upgrade(upgrade):
+		animation_player.play("broken")
+		_set_as_bought()
+
 
 func buy():
 	if not bought:
-		bought = true
-		animation_player.play("smash")
-		$Buy.play_at_random_pitch()
-		interact_label.text = "Purchased"
+		var success = GameManager.buy_upgrade(upgrade, cost, player)
+
+		if success:
+			animation_player.play("smash")
+			$Buy.play_at_random_pitch()
+			_set_as_bought()
+
+
+func _set_as_bought():
+	bought = true
+	interact_label.text = "Purchased"
 
 
 func _on_body_entered(body: Node2D) -> void:

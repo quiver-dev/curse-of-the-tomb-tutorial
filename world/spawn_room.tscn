@@ -18,28 +18,32 @@ layer_2/tile_data = PackedInt32Array(262140, 131072, 1, 262141, 131072, 1, 32767
 position = Vector2(3141.75, 179.677)
 next_level = ExtResource("3_w2ea5")
 
-[node name="Buyable" parent="." index="2" instance=ExtResource("4_2qlih")]
+[node name="ExtraHealth1" parent="." index="2" instance=ExtResource("4_2qlih")]
 position = Vector2(-725.111, 412.654)
 display_name = "Extra Health"
 cost = 10
 texture = ExtResource("4_rac00")
 
-[node name="Buyable2" parent="." index="3" instance=ExtResource("4_2qlih")]
+[node name="ExtraHealth2" parent="." index="3" instance=ExtResource("4_2qlih")]
 position = Vector2(-9.22852, 412.654)
-display_name = "Cool upgrade!"
-cost = 1000
+upgrade = 1
+display_name = "Extra Health"
+cost = 20
 texture = ExtResource("4_rac00")
 
 [node name="Buyable3" parent="." index="4" instance=ExtResource("4_2qlih")]
 position = Vector2(767.3, 413.973)
+upgrade = 2
 texture = ExtResource("6_0dbut")
 
 [node name="Buyable4" parent="." index="5" instance=ExtResource("4_2qlih")]
 position = Vector2(1512.19, 412.654)
+upgrade = 3
 texture = ExtResource("7_iwh48")
 
 [node name="Buyable5" parent="." index="6" instance=ExtResource("4_2qlih")]
 position = Vector2(2257.07, 408.699)
+upgrade = 4
 texture = ExtResource("8_4o2nb")
 
 [node name="Player" parent="." index="7"]
