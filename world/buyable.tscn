@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=3 uid="uid://4ewxv0a7my04"]
+
+[ext_resource type="Texture2D" uid="uid://c0u3l4x3aku87" path="res://assets/sprites/extraheart_sprites.png" id="1_3d222"]
+[ext_resource type="Script" path="res://world/buyable.gd" id="1_mr3h2"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="2_ycrpm"]
+[ext_resource type="AudioStream" uid="uid://b4tbbs3exq0v1" path="res://assets/sounds/clay_smash.wav" id="3_cgcid"]
+[ext_resource type="FontFile" uid="uid://cdhbxgr4qsly4" path="res://assets/ui/InknutAntiqua-SemiBold.ttf" id="5_1ajku"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s36kl"]
+size = Vector2(420, 420)
+
+[sub_resource type="Animation" id="Animation_cwhhb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kfvn0"]
+resource_name = "broken"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [27]
+}
+
+[sub_resource type="Animation" id="Animation_n4ufh"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+
+[sub_resource type="Animation" id="Animation_frrka"]
+resource_name = "smash"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [14, 27]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_um0jd"]
+_data = {
+"RESET": SubResource("Animation_cwhhb"),
+"broken": SubResource("Animation_kfvn0"),
+"idle": SubResource("Animation_n4ufh"),
+"smash": SubResource("Animation_frrka")
+}
+
+[node name="Buyable" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_mr3h2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s36kl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3d222")
+hframes = 14
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_um0jd")
+}
+
+[node name="Buy" parent="." instance=ExtResource("2_ycrpm")]
+stream = ExtResource("3_cgcid")
+volume_db = -8.0
+
+[node name="UpgradeLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(1200, 2.08165e-12)
+offset_left = -600.0
+offset_top = -300.0
+offset_right = 600.0
+offset_bottom = -159.0
+theme_override_fonts/font = ExtResource("5_1ajku")
+theme_override_font_sizes/font_size = 48
+text = "<Name> - <Cost> coins"
+horizontal_alignment = 1
+
+[node name="InteractLabel" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(1200, 2.08165e-12)
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = -259.0
+theme_override_fonts/font = ExtResource("5_1ajku")
+theme_override_font_sizes/font_size = 48
+text = "Press E to buy"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

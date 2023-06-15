@@ -3,7 +3,9 @@ extends Node
 
 signal on_coins_changed(new_coin_amount: int)
 
-var starting_world := preload("res://world/world_1.tscn")
+enum Upgrades { EXTRA_HEALTH_1, EXTRA_HEALTH_2, DOUBLE_JUMP, DASH, TELEKINESIS }
+
+var starting_world := preload("res://world/spawn_room.tscn")
 
 var health := 3
 var max_health := 3
