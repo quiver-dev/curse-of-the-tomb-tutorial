@@ -6,6 +6,7 @@ func _ready() -> void:
 
 	player.max_health = GameManager.max_health
 	player.current_health = GameManager.health
+	player.has_double_jump = GameManager.has_double_jump
 
 	player.on_health_changed.connect(handle_player_health_changed)
 	player.respawn_needed.connect(GameManager.handle_player_respawn_needed)

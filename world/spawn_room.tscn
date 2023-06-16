@@ -31,9 +31,11 @@ display_name = "Extra Health"
 cost = 20
 texture = ExtResource("4_rac00")
 
-[node name="Buyable3" parent="." index="4" instance=ExtResource("4_2qlih")]
+[node name="DoubleJump" parent="." index="4" instance=ExtResource("4_2qlih")]
 position = Vector2(767.3, 413.973)
 upgrade = 2
+display_name = "Double Jump"
+cost = 30
 texture = ExtResource("6_0dbut")
 
 [node name="Buyable4" parent="." index="5" instance=ExtResource("4_2qlih")]

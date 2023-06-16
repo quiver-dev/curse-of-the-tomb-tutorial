@@ -2,7 +2,10 @@ extends State
 
 
 func _enter(previous_state, host):
-	host.animation_player.play("jump")
+	if host.has_double_jump and host.jumps_remaining == 0:
+		host.animation_player.play("double_jump")
+	else:
+		host.animation_player.play("jump")
 
 
 func _exit(new_state, host):
@@ -20,6 +23,9 @@ func _get_next_state(host):
 
 	if host.attack():
 		return host.States.ATTACK
+
+	if host.jump():
+		return host.States.JUMP
 
 	if host.knockback():
 		return host.States.KNOCKBACK

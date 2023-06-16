@@ -26,6 +26,10 @@ var input_buffer_remaining: float = 0.0
 @export var attack_time: float = 0.25
 var attack_time_remaining: float = 0.0
 
+@export var has_double_jump := false
+@export var has_dash := false
+@export var has_telekinesis := false
+
 var input_disabled := false
 var did_get_hit := false
 var hit_direction := 1
@@ -74,7 +78,7 @@ func _physics_process(delta: float) -> void:
 			# This is our fall state
 			velocity.y += gravity
 	elif not [States.JUMP, States.FALL].has(state_machine.current_state):
-		jumps_remaining = 1
+		jumps_remaining = 2 if has_double_jump else 1
 
 	if input_buffer_remaining > 0.0:
 		input_buffer_remaining -= delta
@@ -93,6 +97,7 @@ func jump() -> bool:
 		velocity.y = jump_velocity
 		hang_time_remaining = jump_hang_time
 		jumps_remaining -= 1
+		input_buffer_remaining = 0
 		return true
 	return false
 
