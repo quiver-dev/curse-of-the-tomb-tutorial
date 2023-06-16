@@ -29,6 +29,9 @@ func _get_next_state(host):
 	if host.jump():
 		return host.States.JUMP
 
+	if host.dash():
+		return host.States.DASH
+
 	if host.knockback():
 		return host.States.KNOCKBACK
 

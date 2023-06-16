@@ -4,7 +4,7 @@ class_name Player
 
 signal respawn_needed
 
-enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK, DIE }
+enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, DASH, KNOCKBACK, DIE }
 
 @export var speed: float = 1500.0
 @export var acceleration := 150.0
@@ -12,7 +12,11 @@ enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, KNOCKBACK, DIE }
 @export var jump_velocity: float = -2500
 @export var jump_deceleration := 200.0
 @export var knockback_velocity := Vector2(1500, -1500)
+@export var dash_speed := 3000.0
 @export var max_fall_time := 3.0
+
+@export var dash_cooldown := 1.0
+var dash_cooldown_remaining := 0.0
 
 @export var knockback_time := 0.2
 var knockback_time_remaining := 0.0
@@ -33,7 +37,9 @@ var attack_time_remaining: float = 0.0
 var input_disabled := false
 var did_get_hit := false
 var hit_direction := 1
+var last_direction := 1
 var jumps_remaining := 1
+var gravity_disabled := false
 
 @onready var pivot = $Pivot
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -49,6 +55,7 @@ func _ready() -> void:
 	state_machine.add_state(States.JUMP, $StateMachine/Jump)
 	state_machine.add_state(States.FALL, $StateMachine/Fall)
 	state_machine.add_state(States.ATTACK, $StateMachine/Attack)
+	state_machine.add_state(States.DASH, $StateMachine/Dash)
 	state_machine.add_state(States.KNOCKBACK, $StateMachine/Knockback)
 	state_machine.add_state(States.DIE, $StateMachine/Die)
 	state_machine.initialize(self, States.SPAWN)
@@ -66,15 +73,17 @@ func _physics_process(delta: float) -> void:
 
 		if direction > 0:
 			pivot.scale.x = 1
+			last_direction = 1
 		elif direction < 0:
 			pivot.scale.x = -1
+			last_direction = -1
 
 		velocity.x = move_toward(velocity.x, direction * speed, acceleration)
 
 	if not is_on_floor():
 		if hang_time_remaining > 0:
 			hang_time_remaining -= delta
-		else:
+		elif not gravity_disabled:
 			# This is our fall state
 			velocity.y += gravity
 	elif not [States.JUMP, States.FALL].has(state_machine.current_state):
@@ -88,6 +97,9 @@ func _physics_process(delta: float) -> void:
 
 	if knockback_time_remaining > 0.0:
 		knockback_time_remaining -= delta
+
+	if dash_cooldown_remaining > 0.0:
+		dash_cooldown_remaining -= delta
 
 	move_and_slide()
 
@@ -116,6 +128,13 @@ func attack() -> bool:
 func knockback() -> bool:
 	if did_get_hit:
 		knockback_time_remaining = knockback_time
+		return true
+	return false
+
+
+func dash() -> bool:
+	if not input_disabled and has_dash and Input.is_action_just_pressed("dash") and dash_cooldown_remaining <= 0.0:
+		dash_cooldown_remaining = dash_cooldown
 		return true
 	return false
 

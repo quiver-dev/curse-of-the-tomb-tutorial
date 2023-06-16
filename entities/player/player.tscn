@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2gmra0xgmisf"]
+[gd_scene load_steps=33 format=3 uid="uid://c2gmra0xgmisf"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/theguardian_spritesheet.png" id="2_2f3f1"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://entities/player/player_spawn.gd" id="10_n4520"]
 [ext_resource type="Script" path="res://entities/player/player_attack.gd" id="12_g1kmt"]
 [ext_resource type="Script" path="res://entities/player/player_knockback.gd" id="14_8um55"]
+[ext_resource type="Script" path="res://entities/player/player_dash.gd" id="16_qatl5"]
 [ext_resource type="Script" path="res://entities/player/player_die.gd" id="17_xixji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3wj7"]
@@ -306,10 +307,28 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_quwxm"]
+resource_name = "dash"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [56, 66]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j72vw"]
 _data = {
 "RESET": SubResource("Animation_kqutv"),
 "attack": SubResource("Animation_wc4ej"),
+"dash": SubResource("Animation_quwxm"),
 "die": SubResource("Animation_334hc"),
 "double_jump": SubResource("Animation_vmpio"),
 "fall": SubResource("Animation_8f43p"),
@@ -388,6 +407,9 @@ script = ExtResource("10_5td2u")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("12_g1kmt")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("16_qatl5")
 
 [node name="Knockback" type="Node" parent="StateMachine"]
 script = ExtResource("14_8um55")

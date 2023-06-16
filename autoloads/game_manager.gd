@@ -15,7 +15,7 @@ var starting_world := preload("res://world/spawn_room.tscn")
 
 var health := 3
 var max_health := 3
-var coins := 30:
+var coins := 0:
 	set(value):
 		coins = value
 		on_coins_changed.emit(coins)
@@ -63,6 +63,7 @@ func buy_upgrade(upgrade: Upgrades, cost: int, player: Player) -> bool:
 			player.has_double_jump = true
 		Upgrades.DASH:
 			has_dash = true
+			player.has_dash = true
 		Upgrades.TELEKINESIS:
 			has_telekinesis = true
 
