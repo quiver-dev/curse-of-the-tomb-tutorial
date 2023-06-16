@@ -342,6 +342,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_nqmvq")
+has_telekinesis = true
 max_health = 3
 invulnerability_time = 1.0
 
@@ -352,6 +353,9 @@ texture = ExtResource("2_2f3f1")
 hframes = 14
 vframes = 14
 frame = 30
+
+[node name="SwordPosition" type="Marker2D" parent="Pivot"]
+position = Vector2(196, 37)
 
 [node name="Hurtbox" parent="Pivot" instance=ExtResource("3_66aqk")]
 position = Vector2(197, 68)

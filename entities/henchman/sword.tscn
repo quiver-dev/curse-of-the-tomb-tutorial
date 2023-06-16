@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt1x487ywlu58"]
+
+[ext_resource type="Script" path="res://entities/henchman/sword.gd" id="1_2t8uk"]
+[ext_resource type="Texture2D" uid="uid://oj2xbwfdbftn" path="res://assets/sprites/sword.png" id="1_ikv7f"]
+[ext_resource type="PackedScene" uid="uid://btk5ekt1aaicl" path="res://entities/hurtbox.tscn" id="2_bvq3l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1ibs"]
+radius = 175.0
+
+[node name="Sword" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 2.66454e-15
+script = ExtResource("1_2t8uk")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+texture = ExtResource("1_ikv7f")
+flip_h = true
+
+[node name="Hurtbox" parent="Pivot" instance=ExtResource("2_bvq3l")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/Hurtbox"]
+polygon = PackedVector2Array(-5, 51, 28, 30, 49, 4, 58, -27, 55, -52, 38, -76, 32, -78, 31, -61, 26, -34, 18, -14, 6, 5, -10, 24, -26, 32, -26, 46, -16, 55)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-5, 51, 28, 30, 49, 4, 58, -27, 55, -52, 38, -76, 32, -78, 31, -61, 26, -34, 18, -14, 6, 5, -10, 24, -26, 32, -26, 46, -16, 55)
+
+[node name="PickupRadius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRadius"]
+shape = SubResource("CircleShape2D_s1ibs")
+
+[connection signal="body_entered" from="PickupRadius" to="." method="_on_pickup_radius_body_entered"]

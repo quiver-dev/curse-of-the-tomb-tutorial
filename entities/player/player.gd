@@ -40,8 +40,10 @@ var hit_direction := 1
 var last_direction := 1
 var jumps_remaining := 1
 var gravity_disabled := false
+var sword: Sword = null
 
 @onready var pivot = $Pivot
+@onready var sword_position = $Pivot/SwordPosition
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine = $StateMachine
 @onready var footstep_sfx = $Sounds/Footstep

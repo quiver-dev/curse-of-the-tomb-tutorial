@@ -1,6 +1,8 @@
 extends Entity
 
 
+signal sword_dropped(location)
+
 enum States { IDLE, CHASE, PREPARE_ATTACK, ATTACK, DIE }
 
 @export var speed := 800.0
@@ -49,6 +51,10 @@ func should_attack_player() -> bool:
 
 	var distance_to_player = global_position.distance_to(player.global_position)
 	return distance_to_player <= attack_range
+
+
+func drop_sword():
+	sword_dropped.emit(global_position)
 
 
 func _on_damage_taken(attacker: Node2D):
