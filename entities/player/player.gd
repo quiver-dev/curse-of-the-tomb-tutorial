@@ -4,7 +4,7 @@ class_name Player
 
 signal respawn_needed
 
-enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, DASH, KNOCKBACK, DIE }
+enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, THROW, DASH, KNOCKBACK, DIE }
 
 @export var speed: float = 1500.0
 @export var acceleration := 150.0
@@ -57,6 +57,7 @@ func _ready() -> void:
 	state_machine.add_state(States.JUMP, $StateMachine/Jump)
 	state_machine.add_state(States.FALL, $StateMachine/Fall)
 	state_machine.add_state(States.ATTACK, $StateMachine/Attack)
+	state_machine.add_state(States.THROW, $StateMachine/Throw)
 	state_machine.add_state(States.DASH, $StateMachine/Dash)
 	state_machine.add_state(States.KNOCKBACK, $StateMachine/Knockback)
 	state_machine.add_state(States.DIE, $StateMachine/Die)
@@ -123,6 +124,14 @@ func is_falling() -> bool:
 func attack() -> bool:
 	if not input_disabled and Input.is_action_just_pressed("attack") and attack_time_remaining <= 0.0:
 		attack_time_remaining = attack_time
+		return true
+	return false
+
+
+func throw() -> bool:
+	if not input_disabled and Input.is_action_just_pressed("throw") and sword != null and has_telekinesis:
+		sword.throw()
+		sword = null
 		return true
 	return false
 

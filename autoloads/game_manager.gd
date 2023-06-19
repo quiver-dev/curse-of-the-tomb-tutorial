@@ -66,6 +66,7 @@ func buy_upgrade(upgrade: Upgrades, cost: int, player: Player) -> bool:
 			player.has_dash = true
 		Upgrades.TELEKINESIS:
 			has_telekinesis = true
+			player.has_telekinesis = true
 
 	return true
 

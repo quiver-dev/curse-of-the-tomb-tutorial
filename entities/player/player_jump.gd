@@ -24,6 +24,9 @@ func _get_next_state(host):
 	if host.attack():
 		return host.States.ATTACK
 
+	if host.throw():
+		return host.States.THROW
+
 	if host.jump():
 		return host.States.JUMP
 
