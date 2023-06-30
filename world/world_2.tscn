@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://chuufec3e7ekj"]
+[gd_scene load_steps=8 format=3 uid="uid://chuufec3e7ekj"]
 
 [ext_resource type="PackedScene" uid="uid://bdmy1xj54k4jr" path="res://world/world.tscn" id="1_x71lp"]
 [ext_resource type="PackedScene" uid="uid://d1dnnur6ia6jb" path="res://world/portal.tscn" id="2_wfobk"]
+[ext_resource type="PackedScene" uid="uid://ccmn11wh48x71" path="res://world/boss_world.tscn" id="3_260um"]
 [ext_resource type="PackedScene" uid="uid://dvgkd5k4g87tx" path="res://entities/scorpion/scorpion.tscn" id="3_pr6e6"]
 [ext_resource type="PackedScene" uid="uid://cm3druo1qq5j5" path="res://entities/skullbat/skullbat.tscn" id="4_6p5ym"]
 [ext_resource type="PackedScene" uid="uid://cgrvxmx8fk1qe" path="res://collectables/coin.tscn" id="4_q5s1x"]
@@ -18,6 +19,7 @@ layer_4/tile_data = PackedInt32Array(65560, 720896, 9, 28, 786432, 9, 29, 851968
 
 [node name="Portal" parent="." index="1" instance=ExtResource("2_wfobk")]
 position = Vector2(17804.6, -843.875)
+next_level = ExtResource("3_260um")
 
 [node name="Player" parent="." index="2"]
 position = Vector2(111.151, 125.045)

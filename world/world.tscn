@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=14 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://collectables/collectable_manager.gd" id="6_7oqul"]
 [ext_resource type="Script" path="res://world/projectile_manager.gd" id="6_rpaap"]
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
+[ext_resource type="AudioStream" uid="uid://cuo05jhfe0gbe" path="res://assets/sounds/desert_ambient_loop.wav" id="7_rj1uq"]
+[ext_resource type="AudioStream" uid="uid://d0u66b27j7wee" path="res://assets/sounds/safari_loop.wav" id="8_muxfd"]
 [ext_resource type="PackedScene" uid="uid://j23swdys4xvy" path="res://world/parallax_background.tscn" id="10_hfspt"]
 [ext_resource type="PackedScene" uid="uid://sh8yqcirmu6y" path="res://world/sand_layer.tscn" id="11_t5uq6"]
 
@@ -1177,6 +1179,9 @@ layer_4/tile_data = PackedInt32Array()
 zoom = Vector2(0.75, 0.75)
 script = ExtResource("4_ry57f")
 
+[node name="ShakeTimer" type="Timer" parent="Player/Camera2D"]
+one_shot = true
+
 [node name="Breakables" type="Node" parent="."]
 
 [node name="Enemies" type="Node" parent="."]
@@ -1186,6 +1191,18 @@ script = ExtResource("6_7oqul")
 
 [node name="ProjectileManager" type="Node" parent="."]
 script = ExtResource("6_rpaap")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("7_rj1uq")
+volume_db = -4.0
+autoplay = true
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("8_muxfd")
+volume_db = -18.0
+autoplay = true
 
 [node name="HUD" parent="." instance=ExtResource("6_scts8")]
 

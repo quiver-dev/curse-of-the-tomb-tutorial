@@ -162,6 +162,7 @@ func _on_damage_taken(attacker: Node2D):
 	did_get_hit = true
 	var direction_to_attacker := attacker.global_position.direction_to(global_position)
 	hit_direction = -1 if direction_to_attacker.x < 0 else 1
+	GlobalSignals.camera_shake_requested.emit(0.2, 500)
 
 
 func _unhandled_input(event: InputEvent) -> void:
