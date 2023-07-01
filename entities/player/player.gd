@@ -6,6 +6,7 @@ signal respawn_needed
 
 enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, THROW, DASH, KNOCKBACK, DIE }
 
+@export var spawn_state_disabled := false
 @export var speed: float = 1500.0
 @export var acceleration := 150.0
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -61,7 +62,7 @@ func _ready() -> void:
 	state_machine.add_state(States.DASH, $StateMachine/Dash)
 	state_machine.add_state(States.KNOCKBACK, $StateMachine/Knockback)
 	state_machine.add_state(States.DIE, $StateMachine/Die)
-	state_machine.initialize(self, States.SPAWN)
+	state_machine.initialize(self, States.SPAWN if not spawn_state_disabled else States.IDLE)
 	on_damage_taken.connect(_on_damage_taken)
 
 	if has_node("Camera2D"):

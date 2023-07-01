@@ -40,8 +40,3 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player and is_zero_approx(direction):
 		var direction_to_player = global_position.direction_to(body.global_position)
 		direction = -1 if direction_to_player.x < 0 else 1
-
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	if [1].has(state_machine.current_state):
-		pass

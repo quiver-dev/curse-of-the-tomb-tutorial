@@ -10,6 +10,9 @@ signal on_death(entity)
 @export var max_health := 1
 var current_health := 1
 
+@export var max_shield := 0
+var current_shield := 0
+
 @export var invulnerability_time := 0.0
 var invulnerability_time_remaining := 0.0
 
@@ -28,6 +31,12 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage: int, attacker: Node2D):
 	if is_dead or invulnerability_time_remaining > 0.0:
 		return
+
+	if current_shield > 0:
+		current_shield -= damage
+
+		if current_shield <= 0:
+			current_shield = 0
 
 	current_health -= damage
 	on_damage_taken.emit(attacker)
