@@ -1,17 +1,35 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5s4taydfstn4"]
+[gd_scene load_steps=18 format=3 uid="uid://b5s4taydfstn4"]
 
 [ext_resource type="PackedScene" uid="uid://cvx863djastva" path="res://entities/enemy.tscn" id="1_ll7tk"]
 [ext_resource type="Texture2D" uid="uid://dmpx8psgylkim" path="res://assets/sprites/golem_spritesheet.png" id="2_cr24j"]
 [ext_resource type="Script" path="res://entities/golem_boss/golem_boss.gd" id="2_ir53g"]
 [ext_resource type="AudioStream" uid="uid://cwx0dt8sp4hd1" path="res://assets/sounds/hit.wav" id="4_dk1wo"]
 [ext_resource type="AudioStream" uid="uid://csuikam7jthy2" path="res://assets/sounds/growl.wav" id="5_p03wu"]
-[ext_resource type="Script" path="res://entities/golem_boss/golem_boss_idle_phase_1.gd" id="6_0f71k"]
+[ext_resource type="Script" path="res://entities/golem_boss/golem_boss_idle.gd" id="6_51eha"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="6_melur"]
+[ext_resource type="AudioStream" uid="uid://hxtq6gw6erg6" path="res://assets/sounds/rock_slam.wav" id="7_y55nf"]
+[ext_resource type="Script" path="res://entities/golem_boss/golem_boss_leap_attack.gd" id="9_06a46"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_raagv"]
 size = Vector2(360, 560)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hrf4d"]
 size = Vector2(520, 560)
+
+[sub_resource type="Animation" id="Animation_btl1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_xfoo8"]
 resource_name = "idle"
@@ -31,8 +49,10 @@ tracks/0/keys = {
 "values": [30, 39]
 }
 
-[sub_resource type="Animation" id="Animation_btl1i"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_qefll"]
+resource_name = "land"
+length = 0.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -40,10 +60,72 @@ tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [54, 59]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slam")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.2, 500.0],
+"method": &"request_camera_shake"
+}, {
+"args": [],
+"method": &"land"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vpjkv"]
+resource_name = "leap"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [45, 46, 46, 53]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"leap"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_bpv8l"]
@@ -97,6 +179,8 @@ tracks/2/keys = {
 _data = {
 "RESET": SubResource("Animation_btl1i"),
 "idle": SubResource("Animation_xfoo8"),
+"land": SubResource("Animation_qefll"),
+"leap": SubResource("Animation_vpjkv"),
 "spawn": SubResource("Animation_bpv8l")
 }
 
@@ -124,10 +208,21 @@ stream = ExtResource("4_dk1wo")
 stream = ExtResource("5_p03wu")
 volume_db = -8.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="Slam" parent="." index="4" instance=ExtResource("6_melur")]
+stream = ExtResource("7_y55nf")
+volume_db = -12.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_2j2k6")
 }
 
 [node name="IdlePhase1" type="Node" parent="StateMachine" index="0"]
-script = ExtResource("6_0f71k")
+script = ExtResource("6_51eha")
+
+[node name="LeapAttackPhase1" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("9_06a46")
+
+[node name="PoundAttackPhase1" type="Node" parent="StateMachine" index="2"]
+
+[node name="VulnerablePhase1" type="Node" parent="StateMachine" index="3"]

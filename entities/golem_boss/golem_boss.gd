@@ -1,7 +1,17 @@
 extends Entity
+class_name Golem
 
 
-enum States { IDLE_PHASE_1 }
+enum States {
+	IDLE_PHASE_1,
+	LEAP_ATTACK_PHASE_1,
+	POUND_ATTACK_PHASE_1,
+	VULNERABLE_PHASE_1
+	}
+
+@export var speed: float = 750.0
+@export var gravity: float = 500
+@export var jump_velocity: float = -7500
 
 var player: Player = null
 
@@ -11,8 +21,27 @@ var player: Player = null
 
 
 func _ready() -> void:
+	super()
 	state_machine.add_state(States.IDLE_PHASE_1, $StateMachine/IdlePhase1)
+	state_machine.add_state(States.LEAP_ATTACK_PHASE_1, $StateMachine/LeapAttackPhase1)
+	state_machine.add_state(States.POUND_ATTACK_PHASE_1, $StateMachine/PoundAttackPhase1)
+	state_machine.add_state(States.VULNERABLE_PHASE_1, $StateMachine/VulnerablePhase1)
 	on_damage_taken.connect(_on_damage_taken)
+
+
+func _physics_process(delta: float) -> void:
+	super(delta)
+	velocity.y += gravity
+	move_and_slide()
+
+
+func leap():
+	velocity.x = speed * pivot.scale.x
+	velocity.y = jump_velocity
+
+
+func land():
+	velocity.x = 0
 
 
 func initialize_state_machine():
