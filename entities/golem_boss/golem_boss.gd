@@ -12,6 +12,7 @@ enum States {
 	IDLE_PHASE_2,
 	LEAP_ATTACK_PHASE_2,
 	POUND_ATTACK_PHASE_2,
+	LASER_ATTACK_PHASE_2,
 	VULNERABLE_PHASE_2
 	}
 
@@ -25,6 +26,8 @@ var phase := 1
 @onready var state_machine = $StateMachine
 @onready var pivot = $Pivot
 @onready var animation_player = $AnimationPlayer
+@onready var laser_animation_player = $Pivot/Laser/AnimationPlayer
+@onready var laser_sfx = $Laser
 
 
 func _ready() -> void:
@@ -37,6 +40,7 @@ func _ready() -> void:
 	state_machine.add_state(States.IDLE_PHASE_2, $StateMachine/IdlePhase2)
 	state_machine.add_state(States.LEAP_ATTACK_PHASE_2, $StateMachine/LeapAttackPhase2)
 	state_machine.add_state(States.POUND_ATTACK_PHASE_2, $StateMachine/PoundAttackPhase2)
+	state_machine.add_state(States.LASER_ATTACK_PHASE_2, $StateMachine/LaserAttackPhase2)
 	state_machine.add_state(States.VULNERABLE_PHASE_2, $StateMachine/VulnerablePhase2)
 
 	on_damage_taken.connect(_on_damage_taken)

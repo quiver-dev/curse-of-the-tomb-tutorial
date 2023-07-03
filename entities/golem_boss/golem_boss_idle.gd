@@ -37,7 +37,7 @@ func choose_next_state(host: Golem) -> Golem.States:
 	] if host.phase == 1 else [
 		host.States.LEAP_ATTACK_PHASE_2,
 		host.States.POUND_ATTACK_PHASE_2,
-		# laser attack
+		host.States.LASER_ATTACK_PHASE_2,
 	]
 
 	return attacks.pick_random()
