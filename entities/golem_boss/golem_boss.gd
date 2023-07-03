@@ -2,6 +2,8 @@ extends Entity
 class_name Golem
 
 
+signal rock_spawned
+
 enum States {
 	IDLE_PHASE_1,
 	LEAP_ATTACK_PHASE_1,
@@ -42,6 +44,10 @@ func leap():
 
 func land():
 	velocity.x = 0
+
+
+func pound():
+	rock_spawned.emit()
 
 
 func initialize_state_machine():

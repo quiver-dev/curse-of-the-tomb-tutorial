@@ -29,7 +29,7 @@ func _get_next_state(host):
 func choose_next_state(host: Golem) -> Golem.States:
 	var attacks := [
 		host.States.LEAP_ATTACK_PHASE_1,
-#		host.States.POUND_ATTACK_PHASE_1,
+		host.States.POUND_ATTACK_PHASE_1,
 	]
 
 	return attacks.pick_random()

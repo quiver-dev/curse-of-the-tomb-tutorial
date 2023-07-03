@@ -1,0 +1,153 @@
+[gd_scene load_steps=10 format=3 uid="uid://8gyi7dooyuq1"]
+
+[ext_resource type="Script" path="res://entities/golem_boss/falling_rock.gd" id="1_pkot1"]
+[ext_resource type="Texture2D" uid="uid://cn6d15t7lgin2" path="res://assets/sprites/falling_debris_sprites.png" id="2_xwsbd"]
+[ext_resource type="PackedScene" uid="uid://btk5ekt1aaicl" path="res://entities/hurtbox.tscn" id="3_nnjiv"]
+[ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="4_lixov"]
+[ext_resource type="AudioStream" uid="uid://evvtifmm2rbi" path="res://assets/sounds/rock_break.wav" id="5_g2f23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjmam"]
+size = Vector2(280, 230)
+
+[sub_resource type="Animation" id="Animation_ay5v3"]
+resource_name = "break"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [9, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Break")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_i2apq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jh2g8"]
+_data = {
+"RESET": SubResource("Animation_i2apq"),
+"break": SubResource("Animation_ay5v3")
+}
+
+[node name="FallingRock" type="AnimatableBody2D"]
+collision_layer = 0
+sync_to_physics = false
+script = ExtResource("1_pkot1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xwsbd")
+hframes = 9
+vframes = 2
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_nnjiv")]
+collision_mask = 2
+monitoring = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_jjmam")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jjmam")
+
+[node name="Break" parent="." instance=ExtResource("4_lixov")]
+stream = ExtResource("5_g2f23")
+volume_db = -8.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jh2g8")
+}

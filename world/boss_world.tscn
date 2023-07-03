@@ -93,7 +93,27 @@ position = Vector2(4792.16, 1092.26)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
-[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+[node name="RockSpawns" type="Node" parent="." index="3"]
+
+[node name="RockSpawn" type="Marker2D" parent="RockSpawns" index="0"]
+position = Vector2(1032, -320)
+
+[node name="RockSpawn2" type="Marker2D" parent="RockSpawns" index="1"]
+position = Vector2(1833, -320)
+
+[node name="RockSpawn3" type="Marker2D" parent="RockSpawns" index="2"]
+position = Vector2(2634, -320)
+
+[node name="RockSpawn4" type="Marker2D" parent="RockSpawns" index="3"]
+position = Vector2(3437, -320)
+
+[node name="RockSpawn5" type="Marker2D" parent="RockSpawns" index="4"]
+position = Vector2(4238, -320)
+
+[node name="RockSpawn6" type="Marker2D" parent="RockSpawns" index="5"]
+position = Vector2(5039, -320)
+
+[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 autoplay = "cinematic"
 libraries = {
 "": SubResource("AnimationLibrary_mmoh6")
