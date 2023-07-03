@@ -20,6 +20,10 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
+	if host.current_shield <= 0:
+		var state = host.States.VULNERABLE_PHASE_1 if host.phase == 1 else host.States.VULNERABLE_PHASE_2
+		return state
+
 	if decision_interval_remaining <= 0:
 		return choose_next_state(host)
 
@@ -30,6 +34,10 @@ func choose_next_state(host: Golem) -> Golem.States:
 	var attacks := [
 		host.States.LEAP_ATTACK_PHASE_1,
 		host.States.POUND_ATTACK_PHASE_1,
+	] if host.phase == 1 else [
+		host.States.LEAP_ATTACK_PHASE_2,
+		host.States.POUND_ATTACK_PHASE_2,
+		# laser attack
 	]
 
 	return attacks.pick_random()

@@ -4,6 +4,7 @@ class_name Entity
 
 signal on_damage_taken(attacker: Node2D)
 signal on_health_changed(new_health: int)
+signal on_shield_changed(new_shield: int)
 signal on_death(entity)
 
 @export var should_play_damage_tween := true
@@ -21,6 +22,7 @@ var is_dead := false
 
 func _ready() -> void:
 	current_health = max_health
+	current_shield = max_shield
 
 
 func _physics_process(delta: float) -> void:
@@ -37,10 +39,12 @@ func take_damage(damage: int, attacker: Node2D):
 
 		if current_shield <= 0:
 			current_shield = 0
+		on_shield_changed.emit(current_shield)
+	else:
+		current_health -= damage
+		on_health_changed.emit(current_health)
 
-	current_health -= damage
 	on_damage_taken.emit(attacker)
-	on_health_changed.emit(current_health)
 
 	if invulnerability_time > 0.0 and current_health > 0:
 		invulnerability_time_remaining = invulnerability_time
@@ -50,6 +54,11 @@ func take_damage(damage: int, attacker: Node2D):
 
 	if current_health <= 0:
 		die()
+
+
+func reset_shield():
+	current_shield = max_shield
+	on_shield_changed.emit(current_shield)
 
 
 func restore_health(health: int):

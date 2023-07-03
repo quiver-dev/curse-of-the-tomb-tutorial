@@ -8,7 +8,11 @@ enum States {
 	IDLE_PHASE_1,
 	LEAP_ATTACK_PHASE_1,
 	POUND_ATTACK_PHASE_1,
-	VULNERABLE_PHASE_1
+	VULNERABLE_PHASE_1,
+	IDLE_PHASE_2,
+	LEAP_ATTACK_PHASE_2,
+	POUND_ATTACK_PHASE_2,
+	VULNERABLE_PHASE_2
 	}
 
 @export var speed: float = 750.0
@@ -16,6 +20,7 @@ enum States {
 @export var jump_velocity: float = -7500
 
 var player: Player = null
+var phase := 1
 
 @onready var state_machine = $StateMachine
 @onready var pivot = $Pivot
@@ -28,6 +33,12 @@ func _ready() -> void:
 	state_machine.add_state(States.LEAP_ATTACK_PHASE_1, $StateMachine/LeapAttackPhase1)
 	state_machine.add_state(States.POUND_ATTACK_PHASE_1, $StateMachine/PoundAttackPhase1)
 	state_machine.add_state(States.VULNERABLE_PHASE_1, $StateMachine/VulnerablePhase1)
+
+	state_machine.add_state(States.IDLE_PHASE_2, $StateMachine/IdlePhase2)
+	state_machine.add_state(States.LEAP_ATTACK_PHASE_2, $StateMachine/LeapAttackPhase2)
+	state_machine.add_state(States.POUND_ATTACK_PHASE_2, $StateMachine/PoundAttackPhase2)
+	state_machine.add_state(States.VULNERABLE_PHASE_2, $StateMachine/VulnerablePhase2)
+
 	on_damage_taken.connect(_on_damage_taken)
 
 
@@ -73,5 +84,15 @@ func face_player():
 			pivot.scale.x = -1
 
 
+func enter_phase_2():
+	phase = 2
+	state_machine.set_state(States.IDLE_PHASE_2)
+	reset_shield()
+	print("PHASE 2")
+
+
 func _on_damage_taken(attacker: Node2D):
 	$Hit.play_at_random_pitch()
+	if current_health <= max_health / 2 and phase == 1:
+		enter_phase_2()
+	print("SHIELD: %d  --- HEALTH: %d" % [current_shield, current_health])

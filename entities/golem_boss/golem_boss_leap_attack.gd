@@ -39,8 +39,13 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
+	if host.current_shield <= 0:
+		var state = host.States.VULNERABLE_PHASE_1 if host.phase == 1 else host.States.VULNERABLE_PHASE_2
+		return state
+
 	if leaps_so_far == number_of_leaps:
-		return host.States.IDLE_PHASE_1
+		var state = host.States.IDLE_PHASE_1 if host.phase == 1 else host.States.IDLE_PHASE_2
+		return state
 
 	return null
 
