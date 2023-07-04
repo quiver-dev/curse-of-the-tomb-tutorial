@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccmn11wh48x71"]
+[gd_scene load_steps=10 format=3 uid="uid://ccmn11wh48x71"]
 
 [ext_resource type="PackedScene" uid="uid://bdmy1xj54k4jr" path="res://world/world.tscn" id="1_weune"]
 [ext_resource type="AudioStream" uid="uid://blw81ag1una6x" path="res://assets/sounds/boss.wav" id="2_5say2"]
 [ext_resource type="Script" path="res://world/boss_world.gd" id="2_p0ryy"]
 [ext_resource type="PackedScene" uid="uid://b5s4taydfstn4" path="res://entities/golem_boss/golem_boss.tscn" id="3_c50gq"]
+[ext_resource type="PackedScene" uid="uid://dtxc6joevd5g6" path="res://world/game_over_screen.tscn" id="4_tpbjk"]
 [ext_resource type="PackedScene" uid="uid://d1dnnur6ia6jb" path="res://world/portal.tscn" id="4_ugw1g"]
 
 [sub_resource type="Animation" id="Animation_lc2k1"]
@@ -88,6 +89,7 @@ layer_2/tile_data = PackedInt32Array(393238, 131072, 1, 393237, 131072, 1, 39323
 [node name="Portal" parent="." index="1" instance=ExtResource("4_ugw1g")]
 position = Vector2(3080, 1201)
 is_active = false
+next_level = ExtResource("4_tpbjk")
 
 [node name="Player" parent="." index="2"]
 position = Vector2(1031.55, 1150.22)

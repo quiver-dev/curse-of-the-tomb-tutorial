@@ -75,6 +75,10 @@ func change_scene(new_scene: PackedScene):
 	get_tree().change_scene_to_packed(new_scene)
 
 
+func change_scene_to_starting_world():
+	change_scene(starting_world)
+
+
 func handle_player_respawn_needed():
 	health = max_health
 	change_scene(starting_world)

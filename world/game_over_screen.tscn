@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtxc6joevd5g6"]
+
+[ext_resource type="Script" path="res://world/game_over_screen.gd" id="1_f47bf"]
+
+[node name="GameOverScreen" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f47bf")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="CenterContainer/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.976471, 0.984314, 0.282353, 1)
+theme_override_font_sizes/font_size = 96
+text = "congratulations!"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CenterContainer/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "You beat the game! Thanks for playing.
+
+Use the buttons below to either restart the game, or to quit."
+autowrap_mode = 2
+
+[node name="ButtonArea" type="HBoxContainer" parent="CenterContainer/Rows"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="CenterContainer/Rows/ButtonArea"]
+custom_minimum_size = Vector2(512, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/Rows/ButtonArea"]
+custom_minimum_size = Vector2(256, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/Rows/ButtonArea/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Rows/ButtonArea/QuitButton" to="." method="_on_quit_button_pressed"]
