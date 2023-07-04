@@ -46,6 +46,9 @@ func _execute(delta, host):
 
 
 func _get_next_state(host):
+	if host.current_health <= 0:
+		return host.States.DIE
+
 	if host.current_shield <= 0:
 		var state = host.States.VULNERABLE_PHASE_1 if host.phase == 1 else host.States.VULNERABLE_PHASE_2
 		return state

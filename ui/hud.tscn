@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvtfdx3g0761x"]
+[gd_scene load_steps=6 format=3 uid="uid://dvtfdx3g0761x"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_3dd4b"]
 [ext_resource type="PackedScene" uid="uid://gxfl1xfhu4x5" path="res://ui/heart_sprite.tscn" id="1_7lgq8"]
 [ext_resource type="FontFile" uid="uid://cdhbxgr4qsly4" path="res://assets/ui/InknutAntiqua-SemiBold.ttf" id="3_vvh60"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfujq"]
+bg_color = Color(0.733333, 0.25098, 0.254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64x6o"]
+bg_color = Color(0.243137, 0.270588, 0.733333, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_3dd4b")
@@ -28,6 +34,7 @@ size_flags_vertical = 3
 [node name="HeartArea" type="HBoxContainer" parent="MarginContainer/Rows/TopRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HeartSprite" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
 layout_mode = 2
@@ -38,19 +45,56 @@ layout_mode = 2
 [node name="HeartSprite3" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
 layout_mode = 2
 
-[node name="HeartSprite4" parent="MarginContainer/Rows/TopRow/HeartArea" instance=ExtResource("1_7lgq8")]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="MarginContainer/Rows/TopRow"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Rows/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_right = 120
+
+[node name="BossHUD" type="VBoxContainer" parent="MarginContainer/Rows/TopRow/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="BossHealth" type="ProgressBar" parent="MarginContainer/Rows/TopRow/MarginContainer/BossHUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 80)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_pfujq")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/Rows/TopRow/MarginContainer/BossHUD/BossHealth"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Site Manager's Golem"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BossShield" type="ProgressBar" parent="MarginContainer/Rows/TopRow/MarginContainer/BossHUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 32)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_64x6o")
+value = 50.0
+show_percentage = false
 
 [node name="CoinAmount" type="Label" parent="MarginContainer/Rows/TopRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vvh60")
 theme_override_font_sizes/font_size = 64
 text = "10 coins"
+horizontal_alignment = 2
 
 [node name="MiddleRow" type="HBoxContainer" parent="MarginContainer/Rows"]
 layout_mode = 2

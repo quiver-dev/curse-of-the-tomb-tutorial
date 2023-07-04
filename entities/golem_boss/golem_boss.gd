@@ -13,7 +13,8 @@ enum States {
 	LEAP_ATTACK_PHASE_2,
 	POUND_ATTACK_PHASE_2,
 	LASER_ATTACK_PHASE_2,
-	VULNERABLE_PHASE_2
+	VULNERABLE_PHASE_2,
+	DIE
 	}
 
 @export var speed: float = 750.0
@@ -42,6 +43,7 @@ func _ready() -> void:
 	state_machine.add_state(States.POUND_ATTACK_PHASE_2, $StateMachine/PoundAttackPhase2)
 	state_machine.add_state(States.LASER_ATTACK_PHASE_2, $StateMachine/LaserAttackPhase2)
 	state_machine.add_state(States.VULNERABLE_PHASE_2, $StateMachine/VulnerablePhase2)
+	state_machine.add_state(States.DIE, $StateMachine/Die)
 
 	on_damage_taken.connect(_on_damage_taken)
 
@@ -92,11 +94,9 @@ func enter_phase_2():
 	phase = 2
 	state_machine.set_state(States.IDLE_PHASE_2)
 	reset_shield()
-	print("PHASE 2")
 
 
 func _on_damage_taken(attacker: Node2D):
 	$Hit.play_at_random_pitch()
 	if current_health <= max_health / 2 and phase == 1:
 		enter_phase_2()
-	print("SHIELD: %d  --- HEALTH: %d" % [current_shield, current_health])
