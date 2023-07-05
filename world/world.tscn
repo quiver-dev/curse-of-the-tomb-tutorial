@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=15 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://d0u66b27j7wee" path="res://assets/sounds/safari_loop.wav" id="8_muxfd"]
 [ext_resource type="PackedScene" uid="uid://j23swdys4xvy" path="res://world/parallax_background.tscn" id="10_hfspt"]
 [ext_resource type="PackedScene" uid="uid://sh8yqcirmu6y" path="res://world/sand_layer.tscn" id="11_t5uq6"]
+[ext_resource type="PackedScene" uid="uid://c5o1fknbvn1rl" path="res://ui/pause_menu.tscn" id="12_112w1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0r0kc"]
 texture = ExtResource("2_mywcq")
@@ -1209,3 +1210,6 @@ autoplay = true
 [node name="ParallaxBackground" parent="." instance=ExtResource("10_hfspt")]
 
 [node name="SandLayer" parent="." instance=ExtResource("11_t5uq6")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_112w1")]
+visible = false
