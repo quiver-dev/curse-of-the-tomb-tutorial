@@ -20,6 +20,7 @@ func _ready() -> void:
 	var breakables = $Breakables.get_children()
 	$CollectableManager.initialize(enemies, breakables)
 	$ProjectileManager.initialize(enemies)
+	$ParticleManager.initialize(player)
 
 
 func handle_player_health_changed(new_health: int):

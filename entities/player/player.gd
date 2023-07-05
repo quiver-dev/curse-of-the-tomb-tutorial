@@ -3,6 +3,7 @@ class_name Player
 
 
 signal respawn_needed
+signal footstep_taken(location: Vector2)
 
 enum States { SPAWN, IDLE, RUN, JUMP, FALL, ATTACK, THROW, DASH, KNOCKBACK, DIE }
 
@@ -48,6 +49,7 @@ var sword: Sword = null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine = $StateMachine
 @onready var footstep_sfx = $Sounds/Footstep
+@onready var particle_emission_point = $ParticleEmissionPoint
 
 
 func _ready() -> void:
@@ -153,6 +155,10 @@ func dash() -> bool:
 
 func respawn():
 	respawn_needed.emit()
+
+
+func footstep():
+	footstep_taken.emit(particle_emission_point.global_position)
 
 
 func get_movement_direction() -> float:

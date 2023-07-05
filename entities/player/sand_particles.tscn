@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://be4si2jc7rpgg"]
+
+[ext_resource type="Texture2D" uid="uid://byabxv68efh2c" path="res://assets/sprites/particle.png" id="1_8weus"]
+[ext_resource type="Script" path="res://entities/player/sand_particles.gd" id="2_v6bs3"]
+
+[sub_resource type="Gradient" id="Gradient_q23by"]
+offsets = PackedFloat32Array(0, 0.685796, 1)
+colors = PackedColorArray(1, 0.9, 0.75, 1, 1, 0.9, 0.75, 1, 1, 0.901961, 0.74902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfjgl"]
+gradient = SubResource("Gradient_q23by")
+
+[sub_resource type="Curve" id="Curve_dp7pr"]
+_data = [Vector2(0, 0.522329), 0.0, 0.0, 0, 0, Vector2(0.249192, 1), 0.0, 0.0, 0, 0, Vector2(0.73788, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.50319), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_o48b7"]
+curve = SubResource("Curve_dp7pr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ejv4b"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 90.0
+gravity = Vector3(2.08165e-12, 250, 2.08165e-12)
+initial_velocity_min = 175.0
+initial_velocity_max = 225.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_o48b7")
+color = Color(1, 0.9, 0.75, 1)
+color_ramp = SubResource("GradientTexture1D_vfjgl")
+
+[node name="SandParticles" type="GPUParticles2D"]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_ejv4b")
+texture = ExtResource("1_8weus")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_v6bs3")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

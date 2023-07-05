@@ -5,6 +5,7 @@ func _enter(previous_state, host):
 	host.animation_player.play("idle")
 	if previous_state == host.States.FALL:
 		host.footstep_sfx.play_at_random_pitch()
+		host.footstep()
 
 
 func _exit(new_state, host):
