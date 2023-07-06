@@ -1,8 +1,13 @@
 extends State
 
 
+var last_animation := "attack_2"
+
+
 func _enter(previous_state, host):
-	host.animation_player.play("attack")
+	var animation = "attack" if last_animation == "attack_2" else "attack_2"
+	host.animation_player.play(animation)
+	last_animation = animation
 
 
 func _exit(new_state, host):

@@ -69,12 +69,17 @@ position = Vector2(8385.58, 1185.41)
 
 [node name="Skullbat" parent="Enemies" index="4" instance=ExtResource("5_pwi3s")]
 position = Vector2(7597.27, 297.501)
+max_fly_time = 5.0
 
 [node name="Archaeologist" parent="Enemies" index="5" instance=ExtResource("6_uhro1")]
 position = Vector2(5173.33, 1393.66)
+gravity = null
 
 [node name="Henchman" parent="Enemies" index="6" instance=ExtResource("7_5k1iy")]
 position = Vector2(9823.03, 637.01)
+attack_range = 300.0
+prepare_duration = 0.75
+gravity = null
 
 [node name="Coin" parent="CollectableManager" index="0" instance=ExtResource("3_038yr")]
 position = Vector2(1223.34, 1190.15)

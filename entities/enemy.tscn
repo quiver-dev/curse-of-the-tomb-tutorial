@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvx863djastva"]
+[gd_scene load_steps=5 format=3 uid="uid://cvx863djastva"]
 
 [ext_resource type="PackedScene" uid="uid://btk5ekt1aaicl" path="res://entities/hurtbox.tscn" id="1_e36uk"]
+[ext_resource type="Script" path="res://entities/entity.gd" id="1_ex7te"]
 [ext_resource type="PackedScene" path="res://utilities/extended_audio_stream_player.tscn" id="2_k47uu"]
 [ext_resource type="Script" path="res://utilities/state_machine.gd" id="3_jk68e"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
+script = ExtResource("1_ex7te")
+should_trigger_hitstop = true
+hitstop_time_ms = 50.0
 
 [node name="Pivot" type="Node2D" parent="."]
 

@@ -8,6 +8,9 @@ signal on_shield_changed(new_shield: int)
 signal on_death(entity)
 
 @export var should_play_damage_tween := true
+@export var should_trigger_hitstop := false
+@export var hitstop_time_ms := 0.0
+
 @export var max_health := 1
 var current_health := 1
 
@@ -45,6 +48,8 @@ func take_damage(damage: int, attacker: Node2D):
 		on_health_changed.emit(current_health)
 
 	on_damage_taken.emit(attacker)
+	if should_trigger_hitstop:
+		GlobalSignals.hitstop_requested.emit(hitstop_time_ms)
 
 	if invulnerability_time > 0.0 and current_health > 0:
 		invulnerability_time_remaining = invulnerability_time

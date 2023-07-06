@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c2gmra0xgmisf"]
+[gd_scene load_steps=37 format=3 uid="uid://c2gmra0xgmisf"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_nqmvq"]
 [ext_resource type="Texture2D" uid="uid://bgkbooxhllbn2" path="res://assets/sprites/theguardian_spritesheet.png" id="2_2f3f1"]
@@ -374,10 +374,54 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_53bh3"]
+resource_name = "attack_2"
+length = 0.16
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [126, 132]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_at_random_pitch"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Hurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j72vw"]
 _data = {
 "RESET": SubResource("Animation_kqutv"),
 "attack": SubResource("Animation_wc4ej"),
+"attack_2": SubResource("Animation_53bh3"),
 "dash": SubResource("Animation_quwxm"),
 "die": SubResource("Animation_334hc"),
 "double_jump": SubResource("Animation_vmpio"),
@@ -393,6 +437,8 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_nqmvq")
+should_trigger_hitstop = true
+hitstop_time_ms = 100.0
 max_health = 3
 invulnerability_time = 1.0
 

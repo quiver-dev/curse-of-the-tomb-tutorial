@@ -99,6 +99,9 @@ spawn_state_disabled = true
 position = Vector2(4792.16, 1092.26)
 rotation = 3.14159
 scale = Vector2(1, -1)
+speed = 750.0
+gravity = 500.0
+jump_velocity = -7500.0
 
 [node name="RockSpawns" type="Node" parent="." index="4"]
 

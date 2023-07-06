@@ -163,6 +163,8 @@ _data = {
 scale = Vector2(-1, 1)
 collision_layer = 4
 script = ExtResource("1_c2q6j")
+should_trigger_hitstop = true
+hitstop_time_ms = 50.0
 
 [node name="Pivot" type="Node2D" parent="."]
 

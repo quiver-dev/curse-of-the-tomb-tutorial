@@ -616,6 +616,9 @@ _data = {
 [node name="GolemBoss" instance=ExtResource("1_ll7tk")]
 scale = Vector2(-1, 1)
 script = ExtResource("2_ir53g")
+speed = 750.0
+gravity = 500.0
+jump_velocity = -7500.0
 max_health = 20
 max_shield = 6
 

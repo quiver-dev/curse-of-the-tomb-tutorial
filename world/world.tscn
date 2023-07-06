@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bdmy1xj54k4jr"]
+[gd_scene load_steps=17 format=3 uid="uid://bdmy1xj54k4jr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_5crx2"]
 [ext_resource type="Texture2D" uid="uid://c8cskp2ww6ibb" path="res://assets/sprites/curseofthetomb_environment_tileset.png" id="2_mywcq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dvtfdx3g0761x" path="res://ui/hud.tscn" id="6_scts8"]
 [ext_resource type="Script" path="res://world/particle_manager.gd" id="7_4yxup"]
 [ext_resource type="AudioStream" uid="uid://cuo05jhfe0gbe" path="res://assets/sounds/desert_ambient_loop.wav" id="7_rj1uq"]
+[ext_resource type="Script" path="res://utilities/hitstop.gd" id="8_jrpbi"]
 [ext_resource type="AudioStream" uid="uid://d0u66b27j7wee" path="res://assets/sounds/safari_loop.wav" id="8_muxfd"]
 [ext_resource type="PackedScene" uid="uid://j23swdys4xvy" path="res://world/parallax_background.tscn" id="10_hfspt"]
 [ext_resource type="PackedScene" uid="uid://sh8yqcirmu6y" path="res://world/sand_layer.tscn" id="11_t5uq6"]
@@ -1196,6 +1197,9 @@ script = ExtResource("6_rpaap")
 
 [node name="ParticleManager" type="Node" parent="."]
 script = ExtResource("7_4yxup")
+
+[node name="Hitstop" type="Node" parent="."]
+script = ExtResource("8_jrpbi")
 
 [node name="Music" type="Node" parent="."]
 
