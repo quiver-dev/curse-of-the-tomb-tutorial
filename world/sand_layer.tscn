@@ -1,10 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://sh8yqcirmu6y"]
+[gd_scene load_steps=5 format=3 uid="uid://sh8yqcirmu6y"]
 
 [ext_resource type="Texture2D" uid="uid://dvpgkt7xsmivi" path="res://assets/sprites/background_05.png" id="1_fse24"]
+[ext_resource type="Shader" path="res://world/sand_layer.gdshader" id="2_0a2du"]
+[ext_resource type="Texture2D" uid="uid://b3862dlhc3t7i" path="res://assets/sprites/background_04.png" id="2_nabft"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2ixb"]
+shader = ExtResource("2_0a2du")
+shader_parameter/speed = 0.15
 
 [node name="SandLayer" type="CanvasLayer"]
 layer = -10
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Vignette" type="Sprite2D" parent="."]
 texture = ExtResource("1_fse24")
+centered = false
+
+[node name="SandShader" type="Sprite2D" parent="."]
+light_mask = 0
+texture_repeat = 2
+material = SubResource("ShaderMaterial_r2ixb")
+texture = ExtResource("2_nabft")
 centered = false
