@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://autoloads/game_manager.gd"
 GlobalSignals="*res://autoloads/global_signals.gd"
+SaveManager="*res://autoloads/save_manager.gd"
 
 [display]
 
