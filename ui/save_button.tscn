@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbrertaepk7xh"]
+[gd_scene load_steps=7 format=3 uid="uid://cbrertaepk7xh"]
 
 [ext_resource type="FontFile" uid="uid://cdhbxgr4qsly4" path="res://assets/ui/InknutAntiqua-SemiBold.ttf" id="1_tfl74"]
 [ext_resource type="Texture2D" uid="uid://7g5ew7r4d5h7" path="res://assets/ui/button.png" id="2_mbbmh"]
+[ext_resource type="Script" path="res://ui/save_button.gd" id="3_5sv4a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rw0rx"]
 texture = ExtResource("2_mbbmh")
@@ -26,6 +27,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_75nht")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_1qtvk")
 text = "Level Name
 Total Time Played: 1h 23m 45s"
+script = ExtResource("3_5sv4a")
 
 [node name="DeleteButton" type="Button" parent="."]
 layout_mode = 1

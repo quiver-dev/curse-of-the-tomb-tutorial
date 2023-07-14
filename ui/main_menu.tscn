@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dya7auxgdnkv0"]
+[gd_scene load_steps=6 format=3 uid="uid://dya7auxgdnkv0"]
 
 [ext_resource type="Texture2D" uid="uid://bs8pm7t2jn4b5" path="res://assets/ui/title_screen_background.png" id="1_0bhon"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_xv3oh"]
 [ext_resource type="Texture2D" uid="uid://7006i0emvirc" path="res://assets/ui/game_logo.png" id="2_q6cxp"]
 [ext_resource type="PackedScene" uid="uid://cbrertaepk7xh" path="res://ui/save_button.tscn" id="3_ev3n3"]
 
@@ -8,6 +9,7 @@
 texture = ExtResource("1_0bhon")
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_xv3oh")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -46,10 +48,13 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 30
 
 [node name="SaveButton1" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="SaveButton2" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="SaveButton3" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+unique_name_in_owner = true
 layout_mode = 2

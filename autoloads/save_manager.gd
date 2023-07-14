@@ -32,5 +32,16 @@ func load_game(save_name: String) -> Dictionary:
 		return {}
 
 
+func delete_game(save_name: String) -> bool:
+	var save_path = get_save_path(save_name)
+	var result = DirAccess.remove_absolute(save_path)
+	if result == OK:
+		print("Save %s deleted" % save_name)
+		return true
+	else:
+		print("ERROR: could not delete %s, error code %d" % [save_name, result])
+		return false
+
+
 func get_save_path(save_name: String) -> String:
 	return SAVE_DIR + save_name + SAVE_EXTENSION
