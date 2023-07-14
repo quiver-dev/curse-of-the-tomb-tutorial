@@ -26,11 +26,6 @@ var coins := 0:
 		on_coins_changed.emit(coins)
 
 
-func _enter_tree() -> void:
-	var save_data = SaveManager.load_game(save_name)
-	load_game(save_data)
-
-
 func _exit_tree() -> void:
 	SaveManager.save_game(save_name, create_save_data())
 

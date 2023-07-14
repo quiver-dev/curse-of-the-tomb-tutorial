@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dya7auxgdnkv0"]
+
+[ext_resource type="Texture2D" uid="uid://bs8pm7t2jn4b5" path="res://assets/ui/title_screen_background.png" id="1_0bhon"]
+[ext_resource type="Texture2D" uid="uid://7006i0emvirc" path="res://assets/ui/game_logo.png" id="2_q6cxp"]
+[ext_resource type="PackedScene" uid="uid://cbrertaepk7xh" path="res://ui/save_button.tscn" id="3_ev3n3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vjdhr"]
+texture = ExtResource("1_0bhon")
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_vjdhr")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+texture = ExtResource("2_q6cxp")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "Choose a save to start playing."
+horizontal_alignment = 1
+
+[node name="ButtonArea" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="SaveButton1" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+layout_mode = 2
+
+[node name="SaveButton2" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+layout_mode = 2
+
+[node name="SaveButton3" parent="PanelContainer/MarginContainer/Rows/ButtonArea" instance=ExtResource("3_ev3n3")]
+layout_mode = 2
