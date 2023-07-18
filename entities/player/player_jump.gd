@@ -39,4 +39,7 @@ func _get_next_state(host):
 	if host.is_falling():
 		return host.States.FALL
 
+	if host.is_on_floor():
+		return host.States.IDLE
+
 	return null

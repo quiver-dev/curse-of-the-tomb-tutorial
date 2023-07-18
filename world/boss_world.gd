@@ -13,11 +13,15 @@ var current_rock_spawns: Array[Node] = []
 func _ready() -> void:
 	super()
 
+	var player = $Player
+	player.velocity.x = 0
+	set_player_input_disabled(true)
+
 	portal.hide()
 	portal.is_active = false
 
 	var golem = $GolemBoss
-	golem.player = $Player
+	golem.player = player
 	golem.face_player()
 
 	golem.rock_spawned.connect(on_rock_spawned)
