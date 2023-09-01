@@ -1,3 +1,5 @@
+![Curse of the Tomb Thumbnail](https://uploads.quiver.dev/production/CurseOfTheTomb_UpdatedCover_v2.jpg)
+
 # Curse of the Tomb: A 2D action-adventure platforming game built with Godot 4
 
 Curse of the Tomb is a in-depth example of creating a 2D action-adventure platforming game in Godot 4, brought to you by [Quiver](https://quiver.dev). This code is intended to accompany the  comprehensive [Make a 2D Action Adventure Game with Godot 4 course](https://quiver.dev/tutorials/make-a-2d-action-adventure-game-with-godot-4/).
